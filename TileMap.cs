@@ -77,7 +77,7 @@ public class TileMap : Godot.TileMap
 			GD.Print("");
 		}
 
-		//POPULATE ROOMS
+		//POPULATE MAP WITH ROOMS
 
 		RoomGen roomGen = new RoomGen();
 
@@ -109,7 +109,39 @@ public class TileMap : Godot.TileMap
 				}
 			}
 		}
-		UpdateBitmaskRegion();
+
+		//CREATE DOORS
+
+		for (int i = 0; i < (mapSize * 2) + 1; i++)
+		{
+			for (int j = 0; j < (mapSize * 2) + 1; j++)
+			{
+				if (dungeonRoomGrid[i, j] == 1 || dungeonRoomGrid[i, j] == 2)
+				{
+
+					if (dungeonRoomGrid[i+1, j] == 1 || dungeonRoomGrid[i+1, j] == 2)
+					{
+                        int rand = (int)Math.Round(GD.RandRange(2, 5));
+						for (int k=rand; k<11-rand;k++)
+						{
+							SetCell(10 + 11 * i, k + 11 * j, 1);
+							SetCell(11 + 11 * i, k + 11 * j, 1);
+						}
+					}
+
+					if (dungeonRoomGrid[i, j+1] == 1 || dungeonRoomGrid[i, j+1] == 2)
+					{
+                        int rand = (int)Math.Round(GD.RandRange(2, 5));
+                        for (int k = rand; k < 11-rand; k++)
+                        {
+                            SetCell(k + 11 * i, 10 + 11 * j, 1);
+                            SetCell(k + 11 * i, 11 + 11 * j, 1);
+                        }
+                    }
+				}
+			}
+		}
+				UpdateBitmaskRegion();
 	}
 	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
 	//  public override void _Process(float delta)
