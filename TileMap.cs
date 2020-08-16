@@ -69,6 +69,8 @@ public class TileMap : Godot.TileMap
 			dungeonRoomGrid[walkerArray[i].killX + (mapSize - 1), walkerArray[i].killY + (mapSize - 1)] = 2;
 		}
 
+		dungeonRoomGrid[(mapSize - 1),(mapSize - 1)] = 2;
+
 		for (int i = 0; i < 9; i++)
 		{ for (int j = 0; j < 9; j++)
 			{
