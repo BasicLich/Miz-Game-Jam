@@ -63,7 +63,14 @@ public class Player : KinematicBody2D
 		}
 		motionPercentage += delta/moveTime;
 		GD.Print(motionPercentage);
-		Position = PrevPos + moveDirection * 16 * motionPercentage;
+		Position = PrevPos + moveDirection * 16 * ease(motionPercentage);
+
+	}
+
+	float ease(float x)
+	{
+
+	return (float)-(Math.Cos(Math.PI*x) - 1) / 2;
 
 	}
 }
