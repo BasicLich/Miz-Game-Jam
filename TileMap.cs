@@ -92,6 +92,7 @@ public class TileMap : Godot.TileMap
 		{
 			for (int j = 0; j < (mapSize * 2) + 1; j++)
 			{
+
 				switch (dungeonRoomGrid[i, j])
 				{
 					case 0:
@@ -112,16 +113,22 @@ public class TileMap : Godot.TileMap
 
 		//CREATE DOORS
 
+		//For each room check if there is room below it and to the right of it
 		for (int i = 0; i < (mapSize * 2) + 1; i++)
 		{
 			for (int j = 0; j < (mapSize * 2) + 1; j++)
 			{
 				if (dungeonRoomGrid[i, j] == 1 || dungeonRoomGrid[i, j] == 2)
 				{
+					
 
+					//carve out door
 					if (dungeonRoomGrid[i+1, j] == 1 || dungeonRoomGrid[i+1, j] == 2)
 					{
-                        int rand = (int)Math.Round(GD.RandRange(2, 5));
+
+						//create a door width
+						int rand = (int)Math.Round(GD.RandRange(1, 5));
+
 						for (int k=rand; k<11-rand;k++)
 						{
 							SetCell(10 + 11 * i, k + 11 * j, 1);
@@ -131,13 +138,15 @@ public class TileMap : Godot.TileMap
 
 					if (dungeonRoomGrid[i, j+1] == 1 || dungeonRoomGrid[i, j+1] == 2)
 					{
-                        int rand = (int)Math.Round(GD.RandRange(2, 5));
-                        for (int k = rand; k < 11-rand; k++)
-                        {
-                            SetCell(k + 11 * i, 10 + 11 * j, 1);
-                            SetCell(k + 11 * i, 11 + 11 * j, 1);
-                        }
-                    }
+						//create a door width
+						int rand = (int)Math.Round(GD.RandRange(1, 5));
+
+						for (int k = rand; k < 11-rand; k++)
+						{
+							SetCell(k + 11 * i, 10 + 11 * j, 1);
+							SetCell(k + 11 * i, 11 + 11 * j, 1);
+						}
+					}
 				}
 			}
 		}
@@ -151,11 +160,44 @@ public class TileMap : Godot.TileMap
 
 	void updateTileMapWRoom(ref int[][] roomHolder,int roomX, int roomY)
 	{
+		//ROTATION
+
+		int rand = (int)Math.Round(GD.RandRange(0, 3));
+
+		int x;
+		int y;
+		
+
 		for (int i = 0; i < 11; i++)
 		{
 			for (int j = 0; j < 11; j++)
 			{
-				if (roomHolder[i][j] == 0)
+				switch (rand)
+				{
+					case 0:
+						x = i;
+						y = j;
+						break;
+					case 1:
+						x = j;
+						y = 10-i;
+						break;
+					case 2:
+						x = 10-j;
+						y = 10-i;
+						break;
+					case 3:
+						x = 10 - j;
+						y = i;
+						break;
+					default:
+						x = i;
+						y = j;
+						break;
+				}
+
+
+				if (roomHolder[x][y] == 0)
 				{
 					SetCell(i + 11 * roomX, j + 11 * roomY, 1);
 				}
@@ -182,6 +224,146 @@ public class RoomGen
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
 		};
 
+		mainRooms[1] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
+			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
+			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		mainRooms[1] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		mainRooms[2] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,0,0,0,1,1,0,1},
+			new int[]{ 1,0,1,1,0,0,0,1,1,0,1},
+			new int[]{ 1,0,1,1,0,0,0,1,1,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,1,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		mainRooms[3] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		mainRooms[4] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
+			new int[]{ 1,0,0,1,1,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		mainRooms[5] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,0,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,0,0,0,1},
+			new int[]{ 1,0,0,1,1,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,0,0,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,1,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		mainRooms[6] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
+			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
+			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
+			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
+			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+		};
+
+		mainRooms[7] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+		};
+
+		mainRooms[8] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,1,1,1,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+		};
+
+		mainRooms[9] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,1,1,1,1,0,0,0,1,1,1},
+			new int[]{ 1,1,1,1,1,0,0,0,1,1,1},
+			new int[]{ 1,1,1,1,1,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+		};
+
 		treasureRooms[0] = new int[][]{
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
@@ -202,7 +384,9 @@ public class RoomGen
 		switch (roomType)
 		{
 			case 1:
-				return mainRooms[0];
+				int rand = (int)Math.Round(GD.RandRange(0, 9));
+				GD.Print("room" + rand);
+				return mainRooms[rand];
 
 			case 2:
 				return treasureRooms[0];
@@ -213,7 +397,7 @@ public class RoomGen
 		}
 	}
 
-	int[][][] mainRooms = new int[1][][];
+	int[][][] mainRooms = new int[10][][];
 	
 	int[][][] treasureRooms = new int[1][][];
 
@@ -238,28 +422,28 @@ public class Walker
 		switch(rand)
 		{
 			case 0:
-				if (x+1>mapSize)
+				if (x+1>=mapSize)
 				{
 					goto Restart;
 				}
 				x++;
 				break;
 			case 1:
-				if (x-1<mapSize-(2*mapSize))
+				if (x-1<=mapSize-(2*mapSize))
 				{
 					goto Restart;
 				}
 				x--;
 				break;
 			case 2:
-				if (y+1>mapSize)
+				if (y+1>=mapSize)
 				{
 					goto Restart;
 				}
 				y++;
 				break;
 			case 3:
-				if (y-1<mapSize-(2*mapSize))
+				if (y-1<=mapSize-(2*mapSize))
 				{
 					goto Restart;
 				}
