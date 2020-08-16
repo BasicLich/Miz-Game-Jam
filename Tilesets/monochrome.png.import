@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/monochrome.png-366c29c94fc14be55430a726e7e3d8b0.stex"
+path="res://.import/monochrome.png-b74c1e25573eaaf885a86dbb73a358cb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://monochrome.png"
-dest_files=[ "res://.import/monochrome.png-366c29c94fc14be55430a726e7e3d8b0.stex" ]
+source_file="res://Tilesets/monochrome.png"
+dest_files=[ "res://.import/monochrome.png-b74c1e25573eaaf885a86dbb73a358cb.stex" ]
 
 [params]
 

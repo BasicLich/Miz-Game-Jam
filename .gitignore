@@ -7,3 +7,8 @@ export_presets.cfg
 # Mono-specific ignores
 .mono/
 data_*/
+.vs/Miz Game Jam/v15/.suo
+.vs/Miz Game Jam/v15/Server/sqlite3/db.lock
+.vs/Miz Game Jam/v15/Server/sqlite3/storage.ide
+.vs/Miz Game Jam/v15/Server/sqlite3/storage.ide-shm
+.vs/Miz Game Jam/v15/Server/sqlite3/storage.ide-wal
