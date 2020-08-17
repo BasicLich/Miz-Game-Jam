@@ -13,12 +13,16 @@ public class Spawner : Node2D
 		
 	}
 	
-	public void spawnEnemy()
+	public void spawnEnemy(int enemyDifficulty)
 	{
-		EnemySpawned=true;
-		//todo spawn enemy
+		EnemySpawned = true;
+		var scene = GD.Load<PackedScene>("res://Enemy.tscn");
+		var node = scene.Instance();
+		((Node2D)node).Position = Position;
+		node.Set("difficulty", enemyDifficulty);
+		GetParent().GetParent().FindNode("Enemies").AddChild(node);
 	}
-	
+
 	public void spawnCoin()
 	{
 		if(!EnemySpawned)
@@ -34,7 +38,7 @@ public class Spawner : Node2D
 				}
 				else { node.Call("setType", 0); }
 				GetParent().GetParent().FindNode("Player").Connect("PlayerMotion", node, "checkForCollection");
-				GetParent().FindNode("Coins").AddChild(node);
+				GetParent().GetParent().FindNode("Coins").AddChild(node);
 			}
 		}
 	}

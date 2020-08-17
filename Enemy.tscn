@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemy.cs" type="Script" id=1]
+[ext_resource path="res://Tiles/enemy0.png" type="Texture" id=2]
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
