@@ -56,7 +56,7 @@ public class Player : KinematicBody2D
 		if ((moveFlag) || (!(moveFlag) && (!(velocity.x==0) || !(velocity.y==0)) && MoveTimeout<=0))
 		{
 			TileMap x = (TileMap)GetNode("../TileMap");
-			if (x.GetCellv((Position / 16) + new Vector2(1, 0) + velocity) == 1)
+			if (x.GetCellv((Position / 16) + velocity) == 1)
 			{
 				motion(delta);
 			}

@@ -54,10 +54,9 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 1/shapes = [  ]
 1/z_index = 0
 
-[node name="Node2D" type="Node2D"]
+[node name="Scene" type="Node"]
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2( -9.11857, 1.21908 )
 tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
@@ -65,7 +64,7 @@ tile_data = PoolIntArray( 196611, 0, 0, 196612, 0, 1, 196613, 0, 1, 196614, 0, 1
 script = ExtResource( 2 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 783, 793 )
+position = Vector2( 784, 784 )
 script = ExtResource( 3 )
 moveTime = 0.1
 
@@ -76,3 +75,6 @@ zoom = Vector2( 0.5, 0.5 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
 texture = ExtResource( 4 )
+centered = false
+
+[node name="Spawners" type="Node" parent="."]
