@@ -10,8 +10,11 @@ public class Player : KinematicBody2D
 	float motionPercentage = 0;
 	Vector2 moveDirection;
 	Vector2 PrevPos;
+    int MoveTimeout = 0;
 
-	public void GetInput()
+
+
+    public void GetInput()
 	{
 		velocity = new Vector2();
 
@@ -38,11 +41,25 @@ public class Player : KinematicBody2D
 
 	public override void _Process(float delta)
 	{
+
+        if (MoveTimeout>0)
+        {
+            MoveTimeout -= 1;
+        }
+
 		GetInput();
 		
-		if ((moveFlag) || (!(moveFlag) && (!(velocity.x==0) || !(velocity.y==0))))
+		if ((moveFlag) || (!(moveFlag) && (!(velocity.x==0) || !(velocity.y==0)) && MoveTimeout<=0))
 		{
-			motion(delta);
+            TileMap x = (TileMap)GetNode("../TileMap");
+            if (x.GetCellv((Position / 16) + new Vector2(1, 0) + velocity) == 1)
+            {
+                motion(delta);
+            }
+            else
+            {
+                MoveTimeout = 10;
+            }
 		}
 	}
 
@@ -57,12 +74,13 @@ public class Player : KinematicBody2D
 		}
 		if (motionPercentage==0)
 		{
+			
 			moveDirection = velocity;
 			moveFlag = true;
 			PrevPos = Position;
 		}
 		motionPercentage += delta/moveTime;
-		GD.Print(motionPercentage);
+		//GD.Print(motionPercentage);
 		Position = PrevPos + moveDirection * 16 * ease(motionPercentage);
 
 	}
