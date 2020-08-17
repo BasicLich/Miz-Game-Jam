@@ -17,32 +17,45 @@ public class Player : KinematicBody2D
 	Vector2 PrevPos;
 	int MoveTimeout = 0;
 
+	int HoldCount;
+
+
 	public void GetInput()
 	{
 		velocity = new Vector2();
 
+		if (!Input.IsActionPressed("right") && !Input.IsActionPressed("left") &&
+			!Input.IsActionPressed("down")&& !Input.IsActionPressed("up"))
 		{
-			if (Input.IsActionJustPressed("right"))
-			{
-				velocity.x += 1;
-				return;
-			}
-			if (Input.IsActionJustPressed("left"))
-			{
-				velocity.x -= 1;
-				return;
-			}
-			if (Input.IsActionJustPressed("down"))
-			{
-				velocity.y += 1;
-				return;
-			}
-			if (Input.IsActionJustPressed("up"))
-			{
-				velocity.y -= 1;
-				return;
-			}
+			HoldCount = 0;
 		}
+
+
+
+		if (Input.IsActionPressed("right"))
+		{
+			HoldCount += 1;
+			velocity.x += 1;
+			return;
+		}
+		if (Input.IsActionPressed("left"))
+		{
+			HoldCount += 1;
+			velocity.x -= 1;
+			return;
+		}
+		if (Input.IsActionPressed("down"))
+		{
+			HoldCount += 1;
+			velocity.y += 1;
+			return;
+		}
+		if (Input.IsActionPressed("up"))
+		{
+			HoldCount += 1;
+			velocity.y -= 1;
+			return;
+		}   
 
 	}
 
@@ -56,7 +69,7 @@ public class Player : KinematicBody2D
 
 		GetInput();
 		
-		if ((moveFlag) || (!(moveFlag) && (!(velocity.x==0) || !(velocity.y==0)) && MoveTimeout<=0))
+		if ((moveFlag) || ((HoldCount==1 || HoldCount>17) && !(moveFlag) && (!(velocity.x==0) || !(velocity.y==0)) && MoveTimeout<=0))
 		{
 			TileMap x = (TileMap)GetNode("../TileMap");
 			if (x.GetCellv((Position / 16) + velocity) == 1)
