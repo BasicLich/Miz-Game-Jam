@@ -66,16 +66,30 @@ script = ExtResource( 2 )
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 784, 784 )
 script = ExtResource( 3 )
-moveTime = 0.1
+moveTime = 0.15
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( -0.754578, 0.498047 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
+drag_margin_left = 0.5
+drag_margin_top = 0.5
+drag_margin_right = 0.5
+drag_margin_bottom = 0.5
 
 [node name="Sprite" type="Sprite" parent="Player"]
 texture = ExtResource( 4 )
 centered = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Player"]
+margin_left = 174.144
+margin_top = -142.589
+margin_right = 249.144
+margin_bottom = -62.5885
+text = "Test"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Spawners" type="Node" parent="."]
 

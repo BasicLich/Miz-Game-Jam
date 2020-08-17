@@ -25,8 +25,8 @@ public class TileMap : Godot.TileMap
 		int[,] dungeonRoomGrid = new int[mapSize * 2 + 1, mapSize * 2 + 1];
 
 		int noOfWalkers = (int)Math.Floor(floorLevel / 3f) + 3;
-		GD.Print(noOfWalkers);
-		GD.Print((int)((1f / (floorLevel + 3)) * 100));
+		//GD.Print(noOfWalkers);
+		//GD.Print((int)((1f / (floorLevel + 3)) * 100));
 		Walker[] walkerArray = new Walker[noOfWalkers];
 
 		for (int i = 0; i < walkerArray.Length; i++) { walkerArray[i] = new Walker(); }
@@ -42,7 +42,7 @@ public class TileMap : Godot.TileMap
 				{
 					flag = false;
 					//attempt to kill the walker. chance decreases per floor level
-					bool result = walkerArray[i].stillAlive((int)((1f / (floorLevel + 2)) * 100));
+					bool result = walkerArray[i].stillAlive((int)((1f / (floorLevel + 2)) * 100),floorLevel);
 
 					//if it was killed make the current room a treasure room
 					if (result)
@@ -75,9 +75,9 @@ public class TileMap : Godot.TileMap
 		for (int i = 0; i < 9; i++)
 		{ for (int j = 0; j < 9; j++)
 			{
-				GD.PrintRaw(dungeonRoomGrid[i, j]);
+				//GD.PrintRaw(dungeonRoomGrid[i, j]);
 			}
-			GD.Print("");
+			//GD.Print("");
 		}
 
 		//POPULATE MAP WITH ROOMS
@@ -159,7 +159,7 @@ public class TileMap : Godot.TileMap
 		}
 				UpdateBitmaskRegion();
 
-		var scene = GD.Load<PackedScene>("res://CoinEnemySpawn.tscn");
+		var scene = GD.Load<PackedScene>("res://CoinEnemyManager.tscn");
 		var node = scene.Instance();
 		AddChild(node);
 	}
@@ -446,7 +446,7 @@ public class RoomGen
 		{
 			case 1:
 				rand= (int)Math.Round(GD.RandRange(0, 11));
-				GD.Print("room" + rand);
+				//GD.Print("room" + rand);
 				return mainRooms[rand];
 
 			case 2:
@@ -517,14 +517,14 @@ public class Walker
 		}
 	}
 
-	public bool stillAlive(int chance)
+	public bool stillAlive(int chance, int floorLevel)
 	{
 		lifeLength += 1;
 		if (lifeLength > minimumLife)
 		{
 			int rand = (int)GD.RandRange(0, 100);
 			GD.Print("chance:" + rand);
-			if ((chance+(lifeLength-minimumLife)*20) > rand)
+			if ((chance+(lifeLength-minimumLife)*Math.Min(0,20-floorLevel)) > rand)
 			{
 				GD.Print("kill location:" + x + " " + y);
 				alive = false;
@@ -534,4 +534,8 @@ public class Walker
 		return false;
 	}
 	
+	
 }
+
+
+

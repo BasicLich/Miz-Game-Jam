@@ -27,6 +27,17 @@ public class Coin : Node2D
 			((Sprite)GetNode("Sprite")).Texture = coin_tex;
 		}
 	}
+
+    void checkForCollection(Vector2 playerLoc)
+    {
+        //GD.Print("mypos= "+Position/16);
+        //GD.Print("playerpos= "+ playerLoc);
+        if (playerLoc == (Position / 16))
+        {
+            GD.Print("collected");
+        }
+    }
+
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
 //  {

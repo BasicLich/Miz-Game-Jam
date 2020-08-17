@@ -27,13 +27,14 @@ public class Spawner : Node2D
 			{
 				var scene = GD.Load<PackedScene>("res://Coin.tscn");
 				var node = scene.Instance();
-				((Node2D)node).Position = new Vector2(0, 0);
+				((Node2D)node).Position = Position;
 				if ((int)Math.Round(GD.RandRange(0, 4)) == 0)
 				{
 					node.Call("setType", 1);
 				}
 				else { node.Call("setType", 0); }
-				AddChild(node);
+				GetParent().GetParent().FindNode("Player").Connect("PlayerMotion", node, "checkForCollection");
+				GetParent().FindNode("Coins").AddChild(node);
 			}
 		}
 	}
