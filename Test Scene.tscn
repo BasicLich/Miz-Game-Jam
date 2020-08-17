@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Tiles/tilemap.png" type="Texture" id=1]
 [ext_resource path="res://TileMap.cs" type="Script" id=2]
 [ext_resource path="res://Player.cs" type="Script" id=3]
 [ext_resource path="res://Tiles/char.png" type="Texture" id=4]
+[ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -54,6 +55,9 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 1/shapes = [  ]
 1/z_index = 0
 
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 5 )
+
 [node name="Scene" type="Node"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -81,12 +85,14 @@ drag_margin_bottom = 0.5
 texture = ExtResource( 4 )
 centered = false
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Player"]
-margin_left = 174.144
-margin_top = -142.589
-margin_right = 249.144
-margin_bottom = -62.5885
-text = "Test"
+[node name="Score" type="Label" parent="Player"]
+margin_left = 210.887
+margin_top = -146.46
+margin_right = 250.887
+margin_bottom = -132.46
+custom_fonts/font = SubResource( 3 )
+text = "0"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

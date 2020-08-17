@@ -3,12 +3,13 @@ using System;
 
 public class Player : KinematicBody2D
 {
-
+	
 	[Signal]
 	public delegate void PlayerMotion(Vector2 newLocation);
 
 	[Export]
 	float moveTime = 1;
+	int score = 0;
 	public Vector2 velocity = new Vector2();
 	bool moveFlag = false;
 	float motionPercentage = 0;
@@ -100,4 +101,11 @@ public class Player : KinematicBody2D
 	return (float)-(Math.Cos(Math.PI*x) - 1) / 2;
 
 	}
+
+	public void increaseScore(int value)
+	{
+		score += value;
+		((Label)FindNode("Score")).Text = score.ToString();
+	}
+
 }
