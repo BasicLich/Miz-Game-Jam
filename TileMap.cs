@@ -12,9 +12,9 @@ public class TileMap : Godot.TileMap
 	public override void _Ready()
 	{
 
-		for (int i=0;i<200;i++)
+		for (int i=-20;i<200;i++)
 		{
-			for (int j = 0; j < 200; j++)
+			for (int j = -20; j < 200; j++)
 			{
 				SetCell(i, j, 0);
 			}
