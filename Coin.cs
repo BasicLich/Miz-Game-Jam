@@ -44,7 +44,7 @@ public class Coin : Node2D
         {
             //TODO Play sound
             EmitSignal(nameof(CoinCollected), selfValue);
-            GetParent().RemoveChild(this);
+            QueueFree();
         }
     }
 
