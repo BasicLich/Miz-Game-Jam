@@ -524,7 +524,7 @@ public class Walker
 		{
 			int rand = (int)GD.RandRange(0, 100);
 			GD.Print("chance:" + rand);
-			if (chance > rand)
+			if ((chance+(lifeLength-minimumLife)*20) > rand)
 			{
 				GD.Print("kill location:" + x + " " + y);
 				alive = false;
