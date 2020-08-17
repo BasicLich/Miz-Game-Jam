@@ -69,7 +69,8 @@ public class TileMap : Godot.TileMap
 			dungeonRoomGrid[walkerArray[i].killX + (mapSize - 1), walkerArray[i].killY + (mapSize - 1)] = 2;
 		}
 
-		dungeonRoomGrid[(mapSize - 1),(mapSize - 1)] = 2;
+		//make the starter room a default room
+		dungeonRoomGrid[(mapSize - 1),(mapSize - 1)] = 3;
 
 		for (int i = 0; i < 9; i++)
 		{ for (int j = 0; j < 9; j++)
@@ -83,7 +84,7 @@ public class TileMap : Godot.TileMap
 
 		RoomGen roomGen = new RoomGen();
 
-		int[][] roomHolder = new int[11][]; //structure to hold data for room, room size 9
+		int[][] roomHolder = new int[11][]; //structure to hold data for room, room size 11
 		for (int i=0;i< roomHolder.Length;i++)
 		{
 			roomHolder[i] = new int[11];
@@ -109,6 +110,10 @@ public class TileMap : Godot.TileMap
 						roomHolder = roomGen.randomRoom(2);
 						updateTileMapWRoom(ref roomHolder, i, j);
 						break;
+					case 3:
+						roomHolder = roomGen.randomRoom(3);
+						updateTileMapWRoom(ref roomHolder, i, j);
+						break;
 				}
 			}
 		}
@@ -120,12 +125,12 @@ public class TileMap : Godot.TileMap
 		{
 			for (int j = 0; j < (mapSize * 2) + 1; j++)
 			{
-				if (dungeonRoomGrid[i, j] == 1 || dungeonRoomGrid[i, j] == 2)
+				if (!(dungeonRoomGrid[i, j] == 0))
 				{
 					
 
 					//carve out door
-					if (dungeonRoomGrid[i+1, j] == 1 || dungeonRoomGrid[i+1, j] == 2)
+					if (!(dungeonRoomGrid[i+1, j] == 0))
 					{
 
 						//create a door width
@@ -138,7 +143,7 @@ public class TileMap : Godot.TileMap
 						}
 					}
 
-					if (dungeonRoomGrid[i, j+1] == 1 || dungeonRoomGrid[i, j+1] == 2)
+					if (!(dungeonRoomGrid[i, j+1] == 0))
 					{
 						//create a door width
 						int rand = (int)Math.Round(GD.RandRange(1, 5));
@@ -229,34 +234,6 @@ public class RoomGen
 		mainRooms[1] = new int[][]{
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
-			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
-			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
-		};
-
-		mainRooms[1] = new int[][]{
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
-			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
-			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
-			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
-			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
-		};
-
-		mainRooms[2] = new int[][]{
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
 			new int[]{ 1,0,1,1,0,0,0,1,1,0,1},
 			new int[]{ 1,0,1,1,0,0,0,1,1,0,1},
 			new int[]{ 1,0,1,1,0,0,0,1,1,0,1},
@@ -268,35 +245,23 @@ public class RoomGen
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
 		};
 
+		mainRooms[2] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		
+
 		mainRooms[3] = new int[][]{
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
-			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
-			new int[]{ 1,0,1,1,1,1,1,1,1,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
-		};
-
-		mainRooms[4] = new int[][]{
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
-			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
-			new int[]{ 1,0,0,1,1,0,0,0,0,0,1},
-			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
-			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
-		};
-
-		mainRooms[5] = new int[][]{
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
@@ -310,7 +275,7 @@ public class RoomGen
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
 		};
 
-		mainRooms[6] = new int[][]{
+		mainRooms[4] = new int[][]{
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
 			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
 			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
@@ -321,38 +286,38 @@ public class RoomGen
 			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
 			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
 			new int[]{ 1,1,1,1,0,0,0,1,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+		};
+
+		mainRooms[5] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+		};
+
+		mainRooms[6] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,1,1,1,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
 		};
 
 		mainRooms[7] = new int[][]{
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-		};
-
-		mainRooms[8] = new int[][]{
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-			new int[]{ 1,1,1,1,0,0,0,0,0,0,1},
-			new int[]{ 1,1,1,1,0,0,0,0,0,0,1},
-			new int[]{ 1,1,1,1,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
-			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-		};
-
-		mainRooms[9] = new int[][]{
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
 			new int[]{ 1,1,1,1,1,0,0,0,1,1,1},
 			new int[]{ 1,1,1,1,1,0,0,0,1,1,1},
@@ -366,15 +331,99 @@ public class RoomGen
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
 		};
 
-		treasureRooms[0] = new int[][]{
+		mainRooms[8] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,1,1,1,1,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,1,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,1,1,1,1,0,0,1},
+			new int[]{ 1,0,1,1,1,1,1,1,0,0,1},
+			new int[]{ 1,0,1,1,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,0,0,0,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+		};
+
+		mainRooms[9] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,0,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,0,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,0,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,1,1,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+		};
+
+		mainRooms[10] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,1,1,0,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,1,1,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		mainRooms[11] = new int[][]{
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,1,1,1,0,0,0,1},
+			new int[]{ 1,0,0,0,1,1,1,0,0,0,1},
+			new int[]{ 1,0,0,0,1,1,1,0,0,0,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		treasureRooms[0] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
+			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
+			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		treasureRooms[1] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
+		};
+
+		treasureRooms[2] = new int[][]{
+			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
+			new int[]{ 1,0,0,1,1,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
+			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
 			new int[]{ 1,0,0,0,0,0,0,0,0,0,1},
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
@@ -383,31 +432,37 @@ public class RoomGen
 
 	public int[][] randomRoom(int roomType)
 	{
+		int rand;
+
 		switch (roomType)
 		{
 			case 1:
-				int rand = (int)Math.Round(GD.RandRange(0, 9));
+				rand= (int)Math.Round(GD.RandRange(0, 11));
 				GD.Print("room" + rand);
 				return mainRooms[rand];
 
 			case 2:
-				return treasureRooms[0];
+				rand = (int)Math.Round(GD.RandRange(0, 2));
+				return treasureRooms[rand];
 
+			case 3:
+				return mainRooms[0];
 			default:
 				return mainRooms[0];
-
 		}
 	}
 
-	int[][][] mainRooms = new int[10][][];
+	int[][][] mainRooms = new int[12][][];
 	
-	int[][][] treasureRooms = new int[1][][];
+	int[][][] treasureRooms = new int[4][][];
 
 }
 
 
 public class Walker
 {
+	[Export]
+	int minimumLife = 3;
 	int lifeLength = 0;
 	public int x=0;
 	public int y=0;
@@ -457,7 +512,7 @@ public class Walker
 	public bool stillAlive(int chance)
 	{
 		lifeLength += 1;
-		if (lifeLength > 2)
+		if (lifeLength > minimumLife)
 		{
 			int rand = (int)GD.RandRange(0, 100);
 			GD.Print("chance:" + rand);
