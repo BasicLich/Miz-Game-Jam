@@ -10,11 +10,11 @@ public class Player : KinematicBody2D
 	float motionPercentage = 0;
 	Vector2 moveDirection;
 	Vector2 PrevPos;
-    int MoveTimeout = 0;
+	int MoveTimeout = 0;
 
 
 
-    public void GetInput()
+	public void GetInput()
 	{
 		velocity = new Vector2();
 
@@ -22,18 +22,22 @@ public class Player : KinematicBody2D
 			if (Input.IsActionJustPressed("right"))
 			{
 				velocity.x += 1;
+				return;
 			}
 			if (Input.IsActionJustPressed("left"))
 			{
 				velocity.x -= 1;
+				return;
 			}
 			if (Input.IsActionJustPressed("down"))
 			{
 				velocity.y += 1;
+				return;
 			}
 			if (Input.IsActionJustPressed("up"))
 			{
 				velocity.y -= 1;
+				return;
 			}
 		}
 
@@ -42,24 +46,24 @@ public class Player : KinematicBody2D
 	public override void _Process(float delta)
 	{
 
-        if (MoveTimeout>0)
-        {
-            MoveTimeout -= 1;
-        }
+		if (MoveTimeout>0)
+		{
+			MoveTimeout -= 1;
+		}
 
 		GetInput();
 		
 		if ((moveFlag) || (!(moveFlag) && (!(velocity.x==0) || !(velocity.y==0)) && MoveTimeout<=0))
 		{
-            TileMap x = (TileMap)GetNode("../TileMap");
-            if (x.GetCellv((Position / 16) + new Vector2(1, 0) + velocity) == 1)
-            {
-                motion(delta);
-            }
-            else
-            {
-                MoveTimeout = 10;
-            }
+			TileMap x = (TileMap)GetNode("../TileMap");
+			if (x.GetCellv((Position / 16) + new Vector2(1, 0) + velocity) == 1)
+			{
+				motion(delta);
+			}
+			else
+			{
+				MoveTimeout = 10;
+			}
 		}
 	}
 
