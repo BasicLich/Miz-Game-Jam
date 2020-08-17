@@ -158,12 +158,11 @@ public class TileMap : Godot.TileMap
 			}
 		}
 				UpdateBitmaskRegion();
+
+		var scene = GD.Load<PackedScene>("res://CoinEnemySpawn.tscn");
+		var node = scene.Instance();
+		AddChild(node);
 	}
-	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-	//  public override void _Process(float delta)
-	//  {
-	//      
-	//  }
 
 	void updateTileMapWRoom(ref int[][] roomHolder,int roomX, int roomY)
 	{
@@ -219,6 +218,7 @@ public class TileMap : Godot.TileMap
 			}
 		}
 	}
+
 }
 
 public class RoomGen
