@@ -61,7 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Astar.cs" />
-    <Compile Include="CoinEnemyManager.cs" />
+    <Compile Include="Card.cs" />
+    <Compile Include="CardAndSpawnManager.cs" />
     <Compile Include="Coin.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyManager.cs" />

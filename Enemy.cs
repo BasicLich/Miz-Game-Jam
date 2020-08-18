@@ -10,6 +10,10 @@ public class Enemy : Node2D
 	bool inMotion = true;
 	public Vector2 newPos;
 	public Vector2 velocity;
+	[Export]
+	public List<Card> hand;
+
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -67,18 +71,15 @@ public class Enemy : Node2D
 	{
 		if (Math.Sqrt(Math.Pow(Position.x / 16 - playerLoc.x, 2) + Math.Pow(Position.y / 16 - playerLoc.y, 2)) < (2 + 2 * difficulty))
 		{
-			GD.Print("true");
 			timeout = true;
 		}
 		else
 		{
 			if (timeout)
 			{
-				GD.Print("false");
 				timeout = false;
 			}
 			else {
-				GD.Print("true");
 				timeout = true; }
 		}
 	}

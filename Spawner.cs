@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+using System.Collections.Generic;
 public class Spawner : Node2D
 {
 	public bool EnemySpawned=false;
@@ -13,13 +13,20 @@ public class Spawner : Node2D
 		
 	}
 	
-	public void spawnEnemy(int enemyDifficulty)
+	public void spawnEnemy(int enemyDifficulty,List<Card> monsterHand)
 	{
 		EnemySpawned = true;
 		var scene = GD.Load<PackedScene>("res://Enemy.tscn");
 		var node = scene.Instance();
 		((Node2D)node).Position = Position;
 		node.Set("difficulty", enemyDifficulty);
+		node.Set("hand", monsterHand);
+
+        foreach (Card i in monsterHand)
+        {
+            i.Print();
+        }
+        GD.Print("");
 		GetParent().GetParent().FindNode("Enemies").AddChild(node);
 	}
 
