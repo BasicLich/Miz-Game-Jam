@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Tiles/char.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scene.cs" type="Script" id=5]
 [ext_resource path="res://TileMap.cs" type="Script" id=6]
 [ext_resource path="res://MotionModule.cs" type="Script" id=7]
+[ext_resource path="res://EnemyManager.cs" type="Script" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -118,3 +119,4 @@ script = ExtResource( 7 )
 [node name="Coins" type="Node" parent="."]
 
 [node name="Enemies" type="Node" parent="."]
+script = ExtResource( 8 )

@@ -195,7 +195,8 @@ public class TileMap : Godot.TileMap
 			//GD.Print("");
 		}
 		var scene = GD.Load<PackedScene>("res://CoinEnemyManager.tscn");
-		var node = scene.Instance();
+        GetParent().FindNode("Player").Connect("PlayerMotion", GetParent().FindNode("Enemies"), "moveEnemies");
+        var node = scene.Instance();
 		AddChild(node);
 	}
 

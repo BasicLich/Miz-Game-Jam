@@ -8,6 +8,8 @@ public class Enemy : Node2D
 	public int difficulty;
 	bool timeout=false;
 	bool inMotion = true;
+	public Vector2 newPos;
+	public Vector2 velocity;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -28,41 +30,59 @@ public class Enemy : Node2D
 		
 	}
 
-	public void move(Vector2 dontUse, Vector2 playerLoc)
+	public void choosePath(Vector2 playerLoc)
 	{
-		
-		if (Math.Sqrt(Math.Pow(Position.x / 16 - playerLoc.x, 2) + Math.Pow(Position.y / 16 - playerLoc.y, 2)) < (2 + 2 * difficulty))
+		if (Math.Sqrt(Math.Pow(Position.x / 16 - playerLoc.x, 2) + Math.Pow(Position.y / 16 - playerLoc.y, 2)) < (4 + 2 * difficulty))
 		{
 			Vector2 path = (Vector2)GetParent().GetParent().FindNode("TileMap").Call("pathfind", Position, playerLoc);
-
-			inMotion = true;
-			FindNode("Motion").Call("motion", GetProcessDeltaTime(), Position, (-Position + path * 16) / 16);
-		}
-		else if (Math.Sqrt(Math.Pow(Position.x / 16 - playerLoc.x, 2) + Math.Pow(Position.y / 16 - playerLoc.y, 2)) < (4 + 2 * difficulty))
-		{
-			if (!timeout)
-			{
-				timeout = true;
-				Vector2 path = (Vector2)GetParent().GetParent().FindNode("TileMap").Call("pathfind", Position, playerLoc);
-
-				inMotion = true;
-				FindNode("Motion").Call("motion", GetProcessDeltaTime(), Position, (-Position+path*16)/16);
-			}
-			else { timeout = false; }
-
+			newPos= path * 16;
+			velocity = (-Position + path * 16) / 16;
 		}
 		else
 		{
-			if (!timeout)
+			int rand = (int)Math.Round(GD.RandRange(0, 3));
+			velocity = new Vector2(0, 0);
+			switch (rand)
 			{
-				timeout = true;
-
-				inMotion = true;
-				FindNode("Motion").Call("idle", GetProcessDeltaTime(), Position);
+				case 0:
+					velocity.x = 1;
+					break;
+				case 1:
+					velocity.y = 1;
+					break;
+				case 2:
+					velocity.x = -1;
+					break;
+				case 3:
+					velocity.y = -1;
+					break;
 			}
-			else { timeout = false; }
+			newPos = (Position + velocity * 16);
+
+		}
+
+	}
+
+	public void checkForTimeout(Vector2 playerLoc)
+	{
+		if (Math.Sqrt(Math.Pow(Position.x / 16 - playerLoc.x, 2) + Math.Pow(Position.y / 16 - playerLoc.y, 2)) < (2 + 2 * difficulty))
+		{
+			GD.Print("true");
+			timeout = true;
+		}
+		else
+		{
+			if (timeout)
+			{
+				GD.Print("false");
+				timeout = false;
+			}
+			else {
+				GD.Print("true");
+				timeout = true; }
 		}
 	}
+
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	 public override void _Process(float delta)

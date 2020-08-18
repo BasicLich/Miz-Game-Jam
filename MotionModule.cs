@@ -24,48 +24,38 @@ public class MotionModule : Node
             }
             if (motionPercentage == 0)
             {
+
                 newPos = PrevPos + 16 * velocity;
                 if (GetParent().Name == "Player")
                 {
+                    GD.Print("test");
                     GetParent().EmitSignal(nameof(Player.PlayerMotion), PrevPos / 16, newPos / 16);
                 }
+                else
+                {
+                    foreach(Node i in GetParent().GetChildren())
+                    {
+                        if (i!=this)
+                        {
+                            if (newPos==((Node2D)i).Position)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+
                 motionFlag = true;
                 //GD.Print(PrevPos);
-                //GD.Print(newPos);
-                //GD.Print("");
+               // GD.Print(newPos);
+               // GD.Print("");
             }
             motionPercentage += delta / moveTime;
-            
+           // GD.Print(motionPercentage);
    
             ((Node2D)GetParent()).Position = (((1 - ease(motionPercentage)) * PrevPos) + (newPos * ease(motionPercentage)));
 
             ((Sprite)GetParent().FindNode("Sprite")).Position = new Vector2(0, 20 * (motionPercentage * motionPercentage - motionPercentage));
-        }
-    }
-
-    void idle(float delta, Vector2 Pos)
-    {
-        int rand = (int)Math.Round(GD.RandRange(0, 3));
-        Vector2 velocity=new Vector2(0,0);
-        switch (rand)
-        {
-            case 0:
-                velocity.x = 1;
-                break;
-            case 1:
-                velocity.y = 1;
-                break;
-            case 2:
-                velocity.x = -1;
-                break;
-            case 3:
-                velocity.y = -1;
-                break;    
-        }
-        TileMap x = (TileMap)GetParent().GetParent().GetParent().FindNode("TileMap");
-        if (x.GetCellv((Pos / 16) + velocity) == 1)
-        {
-            motion(delta, Pos, velocity);
         }
     }
 
