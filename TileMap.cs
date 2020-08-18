@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class TileMap : Godot.TileMap
 {
@@ -8,9 +9,23 @@ public class TileMap : Godot.TileMap
 	[Export]
 	int mapSize = 5;
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    public List<List<AStarSharp.Node>> tileArray = new List<List<AStarSharp.Node>>(200);
+
+    public AStarSharp.Astar pathfindAstar;
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
+
+		for (int i = 0; i < 200; i++)
+		{
+            tileArray.Add(new List<AStarSharp.Node>());
+
+            for (int j=0;j< 200;j++)
+			{
+                tileArray[i].Add(new AStarSharp.Node(new Vector2(i, j), false));
+			}
+		}
 
 		for (int i=-20;i<200;i++)
 		{
@@ -138,8 +153,11 @@ public class TileMap : Godot.TileMap
 
 						for (int k=rand; k<11-rand;k++)
 						{
+                            tileArray[10 + 11 * i][k + 11 * j] = new AStarSharp.Node(new Vector2(10 + 11 * i, k + 11 * j), true);
+                            tileArray[11 + 11 * i][k + 11 * j] = new AStarSharp.Node(new Vector2(11 + 11 * i, k + 11 * j), true);
 							SetCell(10 + 11 * i, k + 11 * j, 1);
 							SetCell(11 + 11 * i, k + 11 * j, 1);
+
 						}
 					}
 
@@ -150,6 +168,9 @@ public class TileMap : Godot.TileMap
 
 						for (int k = rand; k < 11-rand; k++)
 						{
+                            tileArray[k + 11 * i][10 + 11 * j] = new AStarSharp.Node(new Vector2(k + 11 * i, 10+ 11 * j), true);
+                            tileArray[k + 11 * i][11 + 11 * j] = new AStarSharp.Node(new Vector2(k + 11 * i, 11 + 11 * j), true);
+
 							SetCell(k + 11 * i, 10 + 11 * j, 1);
 							SetCell(k + 11 * i, 11 + 11 * j, 1);
 						}
@@ -157,8 +178,22 @@ public class TileMap : Godot.TileMap
 				}
 			}
 		}
-				UpdateBitmaskRegion();
 
+        pathfindAstar = new AStarSharp.Astar(tileArray);
+
+        UpdateBitmaskRegion();
+		for (int i = 0; i < 200; i++)
+		{
+			for (int j = 0; j < 200; j++)
+			{
+                if (tileArray[i][j].Walkable)
+                {// GD.PrintRaw(0); 
+                }
+                else {//GD.PrintRaw(1); 
+                    }
+			}
+			//GD.Print("");
+		}
 		var scene = GD.Load<PackedScene>("res://CoinEnemyManager.tscn");
 		var node = scene.Instance();
 		AddChild(node);
@@ -205,9 +240,11 @@ public class TileMap : Godot.TileMap
 
 				if (roomHolder[x][y] == 0 || roomHolder[x][y] == 2)
 				{
-					SetCell(i + 11 * roomX, j + 11 * roomY, 1);
 
-					if (roomHolder[x][y] == 2)
+					SetCell(i + 11 * roomX, j + 11 * roomY, 1);
+                    tileArray[i + 11 * roomX][j + 11 * roomY] = new AStarSharp.Node(new Vector2(i + 11 * roomX,j + 11 * roomY), true);
+
+                    if (roomHolder[x][y] == 2)
 					{
 						var scene = GD.Load<PackedScene>("res://Spawner.tscn");
 						var node = scene.Instance();
@@ -218,6 +255,15 @@ public class TileMap : Godot.TileMap
 			}
 		}
 	}
+
+    Vector2 pathfind(Vector2 myPos,Vector2 otherPos)
+    {
+        GD.Print(myPos/16);
+        GD.Print(otherPos);
+        Stack<AStarSharp.Node> temp=pathfindAstar.FindPath(new Vector2(myPos.x/16,myPos.y/16), new Vector2(otherPos.x,otherPos.y));
+
+        return temp.Pop().Position;
+    }
 
 }
 

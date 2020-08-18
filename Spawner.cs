@@ -20,6 +20,7 @@ public class Spawner : Node2D
 		var node = scene.Instance();
 		((Node2D)node).Position = Position;
 		node.Set("difficulty", enemyDifficulty);
+		GetParent().GetParent().FindNode("Player").Connect("PlayerMotion", node, "move");
 		GetParent().GetParent().FindNode("Enemies").AddChild(node);
 	}
 
