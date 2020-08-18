@@ -1,13 +1,13 @@
 using Godot;
 using System;
-
+using System.Collections.Generic;
 public class Player : KinematicBody2D
 {
 	
 	[Signal]
 	public delegate void PlayerMotion(Vector2 currentLocation,Vector2 newLocation);
 
-	
+    List<Card> hand;
 	int score = 0;
 	public Vector2 velocity = new Vector2();
 
@@ -26,7 +26,17 @@ public class Player : KinematicBody2D
 			HoldCount = 0;
 		}
 
-
+        if(Input.IsKeyPressed(90))
+        {
+            int count = 1;
+            foreach (Card i in hand)
+            {
+                i.Print();
+                GD.Print(count);
+                count += 1;
+            }
+            GD.Print("");
+        }
 
 		if (Input.IsActionJustPressed("right"))
 		{

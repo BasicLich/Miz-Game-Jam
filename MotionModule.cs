@@ -28,7 +28,7 @@ public class MotionModule : Node
                 newPos = PrevPos + 16 * velocity;
                 if (GetParent().Name == "Player")
                 {
-                    GD.Print("test");
+                    //GD.Print("test");
                     GetParent().EmitSignal(nameof(Player.PlayerMotion), PrevPos / 16, newPos / 16);
                 }
                 else
