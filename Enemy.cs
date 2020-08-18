@@ -51,6 +51,17 @@ public class Enemy : Node2D
 			else { timeout = false; }
 
 		}
+		else
+		{
+			if (!timeout)
+			{
+				timeout = true;
+
+				inMotion = true;
+				FindNode("Motion").Call("idle", GetProcessDeltaTime(), Position);
+			}
+			else { timeout = false; }
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

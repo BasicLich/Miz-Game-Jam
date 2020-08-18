@@ -43,6 +43,32 @@ public class MotionModule : Node
         }
     }
 
+    void idle(float delta, Vector2 Pos)
+    {
+        int rand = (int)Math.Round(GD.RandRange(0, 3));
+        Vector2 velocity=new Vector2(0,0);
+        switch (rand)
+        {
+            case 0:
+                velocity.x = 1;
+                break;
+            case 1:
+                velocity.y = 1;
+                break;
+            case 2:
+                velocity.x = -1;
+                break;
+            case 3:
+                velocity.y = -1;
+                break;    
+        }
+        TileMap x = (TileMap)GetParent().GetParent().GetParent().FindNode("TileMap");
+        if (x.GetCellv((Pos / 16) + velocity) == 1)
+        {
+            motion(delta, Pos, velocity);
+        }
+    }
+
     float ease(float x)
     {
 
