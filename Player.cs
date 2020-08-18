@@ -7,7 +7,7 @@ public class Player : KinematicBody2D
 	[Signal]
 	public delegate void PlayerMotion(Vector2 currentLocation,Vector2 newLocation);
 
-    List<Card> hand;
+    public List<Card> hand;
 	int score = 0;
 	public Vector2 velocity = new Vector2();
 
@@ -94,7 +94,7 @@ public class Player : KinematicBody2D
 	public void increaseScore(int value)
 	{
 		score += value;
-		((Label)FindNode("Score")).Text = score.ToString();
+		((Label)GetParent().FindNode("CanvasLayer").FindNode("Score")).Text = score.ToString();
 	}
 
 }

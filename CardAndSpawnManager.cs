@@ -32,12 +32,12 @@ public class CardAndSpawnManager : Node
 
         int[] monsterNo = new int[3];
 
-        while (tempCardTrack >= monsterCards * (3f / 4f))
+        while (tempCardTrack >= monsterCards * (4f / 5f))
         {
             monsterNo[2] += 1;
             tempCardTrack -= 4;
         }
-        while (tempCardTrack >= monsterCards * (1f / 3f))
+        while (tempCardTrack >= monsterCards * (2f / 5f))
         {
             monsterNo[1] += 1;
             tempCardTrack -= 3;

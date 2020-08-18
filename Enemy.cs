@@ -69,7 +69,7 @@ public class Enemy : Node2D
 
 	public void checkForTimeout(Vector2 playerLoc)
 	{
-		if (Math.Sqrt(Math.Pow(Position.x / 16 - playerLoc.x, 2) + Math.Pow(Position.y / 16 - playerLoc.y, 2)) < (2 + 2 * difficulty))
+		if (Math.Sqrt(Math.Pow(Position.x / 16 - playerLoc.x, 2) + Math.Pow(Position.y / 16 - playerLoc.y, 2)) < Math.Floor(3 + 1.5 * difficulty))
 		{
 			timeout = true;
 		}
