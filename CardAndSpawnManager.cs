@@ -18,7 +18,8 @@ public class CardAndSpawnManager : Node
             //rank
             for (int j = 2; j < 15; j++)
             {
-                deck.Add(new Card(i, j));
+                //trump logic here todo
+                deck.Add(new Card(i, j,false));
             }
         }
 
@@ -55,21 +56,37 @@ public class CardAndSpawnManager : Node
         Godot.Collections.Array spawners = GetParent().GetNode("../Spawners").GetChildren();
 
         //spawn in the monsters
+
+        //for each monster difficulty
         for (int i = 0; i < 3; i++)
         {
+            //for each monster of that difficulty
             for (int j = 0; j < monsterNo[i]; j++)
             {
+                //choose a random unused spawner
                 int randomIndex = (int)Math.Round(GD.RandRange(0, spawners.Count - 1));
                 if (!((bool)(((Node)spawners[randomIndex]).Get("EnemySpawned"))))
                 {
+
                     List<Card> monsterHand = new List<Card>();
+                    //give it random cards
                     for (int k = 0; k < i + 2; k++)
                     {
                         int randCardIndex = (int)Math.Round(GD.RandRange(0, deck.Count - 1));
                         monsterHand.Add(deck[randCardIndex]);
                         deck.RemoveAt(randCardIndex);
-
                     }
+
+                    //sort the cards TODO implement trump logic
+
+                    monsterHand.Sort((x, y) => x.value.CompareTo(y.value));
+
+                    foreach(Card k in monsterHand)
+                    {
+                        k.Print();
+                    }
+                    GD.Print("");
+
                     ((Node)spawners[randomIndex]).Call("spawnEnemy", i, monsterHand);
                     continue;
                 }

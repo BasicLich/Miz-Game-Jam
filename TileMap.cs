@@ -7,23 +7,23 @@ public class TileMap : Godot.TileMap
 	[Export]
 	int mapSize = 5;
 
-    public List<List<AStarSharp.Node>> tileArray = new List<List<AStarSharp.Node>>(200);
+	public List<List<AStarSharp.Node>> tileArray = new List<List<AStarSharp.Node>>(200);
 
-    public AStarSharp.Astar pathfindAstar;
+	public AStarSharp.Astar pathfindAstar;
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
 	{
-        int floorLevel = ((Scene)GetParent()).floorLevel;
+		int floorLevel = ((Scene)GetParent()).floorLevel;
 
 
 		for (int i = 0; i < 200; i++)
 		{
-            tileArray.Add(new List<AStarSharp.Node>());
+			tileArray.Add(new List<AStarSharp.Node>());
 
-            for (int j=0;j< 200;j++)
+			for (int j=0;j< 200;j++)
 			{
-                tileArray[i].Add(new AStarSharp.Node(new Vector2(i, j), false));
+				tileArray[i].Add(new AStarSharp.Node(new Vector2(i, j), false));
 			}
 		}
 
@@ -153,8 +153,8 @@ public class TileMap : Godot.TileMap
 
 						for (int k=rand; k<11-rand;k++)
 						{
-                            tileArray[10 + 11 * i][k + 11 * j] = new AStarSharp.Node(new Vector2(10 + 11 * i, k + 11 * j), true);
-                            tileArray[11 + 11 * i][k + 11 * j] = new AStarSharp.Node(new Vector2(11 + 11 * i, k + 11 * j), true);
+							tileArray[10 + 11 * i][k + 11 * j] = new AStarSharp.Node(new Vector2(10 + 11 * i, k + 11 * j), true);
+							tileArray[11 + 11 * i][k + 11 * j] = new AStarSharp.Node(new Vector2(11 + 11 * i, k + 11 * j), true);
 							SetCell(10 + 11 * i, k + 11 * j, 1);
 							SetCell(11 + 11 * i, k + 11 * j, 1);
 
@@ -168,8 +168,8 @@ public class TileMap : Godot.TileMap
 
 						for (int k = rand; k < 11-rand; k++)
 						{
-                            tileArray[k + 11 * i][10 + 11 * j] = new AStarSharp.Node(new Vector2(k + 11 * i, 10+ 11 * j), true);
-                            tileArray[k + 11 * i][11 + 11 * j] = new AStarSharp.Node(new Vector2(k + 11 * i, 11 + 11 * j), true);
+							tileArray[k + 11 * i][10 + 11 * j] = new AStarSharp.Node(new Vector2(k + 11 * i, 10+ 11 * j), true);
+							tileArray[k + 11 * i][11 + 11 * j] = new AStarSharp.Node(new Vector2(k + 11 * i, 11 + 11 * j), true);
 
 							SetCell(k + 11 * i, 10 + 11 * j, 1);
 							SetCell(k + 11 * i, 11 + 11 * j, 1);
@@ -179,24 +179,24 @@ public class TileMap : Godot.TileMap
 			}
 		}
 
-        pathfindAstar = new AStarSharp.Astar(tileArray);
+		pathfindAstar = new AStarSharp.Astar(tileArray);
 
-        UpdateBitmaskRegion();
+		UpdateBitmaskRegion();
 		for (int i = 0; i < 200; i++)
 		{
 			for (int j = 0; j < 200; j++)
 			{
-                if (tileArray[i][j].Walkable)
-                {// GD.PrintRaw(0); 
-                }
-                else {//GD.PrintRaw(1); 
-                    }
+				if (tileArray[i][j].Walkable)
+				{// GD.PrintRaw(0); 
+				}
+				else {//GD.PrintRaw(1); 
+					}
 			}
 			//GD.Print("");
 		}
 		var scene = GD.Load<PackedScene>("res://CardAndSpawnManager.tscn");
-        GetParent().FindNode("Player").Connect("PlayerMotion", GetParent().FindNode("Enemies"), "moveEnemies");
-        var node = scene.Instance();
+
+		var node = scene.Instance();
 		AddChild(node);
 	}
 
@@ -243,9 +243,9 @@ public class TileMap : Godot.TileMap
 				{
 
 					SetCell(i + 11 * roomX, j + 11 * roomY, 1);
-                    tileArray[i + 11 * roomX][j + 11 * roomY] = new AStarSharp.Node(new Vector2(i + 11 * roomX,j + 11 * roomY), true);
+					tileArray[i + 11 * roomX][j + 11 * roomY] = new AStarSharp.Node(new Vector2(i + 11 * roomX,j + 11 * roomY), true);
 
-                    if (roomHolder[x][y] == 2)
+					if (roomHolder[x][y] == 2)
 					{
 						var scene = GD.Load<PackedScene>("res://Spawner.tscn");
 						var node = scene.Instance();
@@ -257,12 +257,12 @@ public class TileMap : Godot.TileMap
 		}
 	}
 
-    Vector2 pathfind(Vector2 myPos,Vector2 otherPos)
-    {
-        Stack<AStarSharp.Node> temp=pathfindAstar.FindPath(new Vector2(myPos.x/16,myPos.y/16), new Vector2(otherPos.x,otherPos.y));
+	Vector2 pathfind(Vector2 myPos,Vector2 otherPos)
+	{
+		Stack<AStarSharp.Node> temp=pathfindAstar.FindPath(new Vector2(myPos.x/16,myPos.y/16), new Vector2(otherPos.x,otherPos.y));
 
-        return temp.Pop().Position;
-    }
+		return temp.Pop().Position;
+	}
 
 }
 

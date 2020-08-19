@@ -4,30 +4,32 @@ using System.Collections.Generic;
 
 public class Enemy : Node2D
 {
-	
+	public int health;
 	public int difficulty;
 	bool timeout=false;
-	bool inMotion = true;
-	public Vector2 newPos;
+	public bool inMotion = true;
 	public Vector2 velocity;
 	[Export]
 	public List<Card> hand;
 
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+
 		Texture tex;
 		if (difficulty == 0)
 		{
+			health = 1;
 			 tex = GD.Load<Texture>("res://Tiles/enemy0.png");
 		}
 		else if (difficulty==1)
 		{
-			 tex = GD.Load<Texture>("res://Tiles/enemy1.png");
+			health = 2;
+			tex = GD.Load<Texture>("res://Tiles/enemy1.png");
 		}
 		else
 		{
+			health = 3;
 			tex = GD.Load<Texture>("res://Tiles/enemy2.png");
 		}
 			((Sprite)GetNode("Sprite")).Texture = tex;
@@ -39,7 +41,6 @@ public class Enemy : Node2D
 		if (Math.Sqrt(Math.Pow(Position.x / 16 - playerLoc.x, 2) + Math.Pow(Position.y / 16 - playerLoc.y, 2)) < (4 + 2 * difficulty))
 		{
 			Vector2 path = (Vector2)GetParent().GetParent().FindNode("TileMap").Call("pathfind", Position, playerLoc);
-			newPos= path * 16;
 			velocity = (-Position + path * 16) / 16;
 		}
 		else
@@ -61,8 +62,6 @@ public class Enemy : Node2D
 					velocity.y = -1;
 					break;
 			}
-			newPos = (Position + velocity * 16);
-
 		}
 
 	}
@@ -88,9 +87,8 @@ public class Enemy : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	 public override void _Process(float delta)
 	  {
-		  if(inMotion)
-		{
-			FindNode("Motion").Call("motion", GetProcessDeltaTime(), Position, new Vector2(0,0));
-		}
+
+			FindNode("Motion").Call("motion", GetProcessDeltaTime(), Position, velocity);
+
   }
 }

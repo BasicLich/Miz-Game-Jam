@@ -7,6 +7,10 @@ public class Player : KinematicBody2D
 	[Signal]
 	public delegate void PlayerMotion(Vector2 currentLocation,Vector2 newLocation);
 
+	[Signal]
+	public delegate void CardAttack(Attack attack);
+
+	public int health;
 	public List<Card> hand;
 	int score = 0;
 	public Vector2 velocity = new Vector2();
@@ -16,6 +20,7 @@ public class Player : KinematicBody2D
 	int HoldCount;
 	public override void _Ready()
 	{
+		health = 5;
 		setSelectorPos();
 	}
 
@@ -30,15 +35,38 @@ public class Player : KinematicBody2D
 		GetInput();
 
 		TileMap x = (TileMap)GetNode("../TileMap");
-		Node target = checkTileForEnemy();
-		if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null) || (bool)FindNode("Motion").Get("motionFlag"))
+        Node target = checkTileForEnemy();
+        if (velocity != new Vector2(0, 0) && target == null)
+			{
+			((EnemyManager)GetParent().FindNode("Enemies")).moveEnemies(Position / 16, Position / 16 + velocity);
+		}
+		else if(velocity != new Vector2(0, 0))
+		{
+			((EnemyManager)GetParent().FindNode("Enemies")).moveEnemies(Position / 16, Position / 16 );
+		}
+         target = checkTileForEnemy();
+        if (target != null)
+        {
+            GD.Print(target.Name);
+        }
+        if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null && velocity!=new Vector2(0,0)) || (bool)FindNode("Motion").Get("motionFlag"))
 		{
 			FindNode("Motion").Call("motion", delta, Position, velocity);
 		}
-		else if ((x.GetCellv((Position / 16) + velocity) == 1))
+		else if ((x.GetCellv((Position / 16) + velocity) == 1) && velocity != new Vector2(0, 0))
 		{ GD.Print("ATTACK");
-			EmitSignal(nameof(Player.PlayerMotion), Position / 16, Position/16);
-			//TODO USE ATTACK
+			EmitSignal(nameof(CardAttack), new Attack(hand[selectedCardIndex], Name, target.Name));
+			
+			
+
+			hand.RemoveAt(selectedCardIndex);
+			((CardDraw)FindNode("CardDraw")).Update();
+			if (selectedCardIndex == hand.Count)
+			{
+				selectedCardIndex -= 1;
+				setSelectorPos();
+			}
+			
 		}
 
 		((Camera2D)FindNode("Camera2D")).Align();
@@ -46,10 +74,25 @@ public class Player : KinematicBody2D
 
 	Node checkTileForEnemy()
 	{
-		foreach (Node2D i in GetParent().FindNode("Enemies").GetChildren())
+		//TODO this code is actually awful i can hopefully improve it in the refactor
+		foreach (Enemy i in GetParent().FindNode("Enemies").GetChildren())
 		{
-			if (i.Position== (Position + (velocity*16)))
+			//GD.Print((i.Position == (Position + (velocity * 16)))+"  "+i.Position+" "+i.newPos +" "+);
+			if (i.velocity != new Vector2(0,0) && !(i.hand.Count==0) && i.Position == (Position + (velocity * 16)))
 			{
+				GD.Print("a");
+				return i;
+			}
+			else if (i.velocity != new Vector2(0, 0) && i.hand.Count == 0 && i.Position == (Position + (velocity * 32)))
+			{
+				GD.Print("b");
+				return i;
+			}
+		   
+			else if (i.velocity == new Vector2(0, 0) && i.Position == (Position + (velocity * 16)))
+			{
+
+				GD.Print("c");
 				return i;
 			}
 		}

@@ -3,10 +3,16 @@ using System;
 
 public class Card : Node
 {
-    public Card(int s,int r)
+    public Card(int s,int r,bool trump)
     {
+        int trumpBoost = 0;
         suit = s;
         rank = r;
+        if (trump)
+        {
+            trumpBoost = 1000;
+        }
+        value = s * 13 + r + trumpBoost;
     }
 
     public void Print()
@@ -14,6 +20,7 @@ public class Card : Node
         GD.Print("Suit: " + suit + " Rank: " + rank);
     }
 
+    public int value;
     public int suit;
     public int rank;
 }
