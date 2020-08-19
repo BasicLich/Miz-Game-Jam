@@ -20,7 +20,41 @@ public class Player : KinematicBody2D
 		setSelectorPos();
 	}
 
-	public void GetInput()
+    public override void _Process(float delta)
+    {
+
+        if (MoveTimeout > 0)
+        {
+            MoveTimeout -= 1;
+        }
+
+        GetInput();
+
+        TileMap x = (TileMap)GetNode("../TileMap");
+        Node target = checkTileForEnemy();
+        if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null) || (bool)FindNode("Motion").Get("motionFlag"))
+        {
+            FindNode("Motion").Call("motion", delta, Position, velocity);
+        }
+        else
+        { GD.Print("ATTACK"); }
+
+        ((Camera2D)FindNode("Camera2D")).Align();
+    }
+
+    Node checkTileForEnemy()
+    {
+        foreach (Node2D i in GetParent().FindNode("Enemies").GetChildren())
+        {
+            if (i.Position== (Position + (velocity*16)))
+            {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    public void GetInput()
 	{
 		velocity = new Vector2();
 
@@ -138,29 +172,7 @@ public class Player : KinematicBody2D
 
 	}
 
-	public override void _Process(float delta)
-	{
-
-		if (MoveTimeout>0)
-		{
-			MoveTimeout -= 1;
-		}
-
-		GetInput();
-		
-
-			TileMap x = (TileMap)GetNode("../TileMap");
-		if (x.GetCellv((Position / 16) + velocity) == 1 || (bool)FindNode("Motion").Get("motionFlag"))
-		{
-
-
-			FindNode("Motion").Call("motion",delta,Position,velocity);
-			}
-
-
-
-		((Camera2D)FindNode("Camera2D")).Align();
-	}
+	
 
 	
 
