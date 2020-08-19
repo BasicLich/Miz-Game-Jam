@@ -21,6 +21,7 @@ public class EnemyManager : Node
 					continue;
 				}
 				
+                //check to make sure its not trying to move to a tile currently or about to be occupied by an enemy
 				if ((Vector2)i.Get("newPos") == ((Vector2)j.Get("newPos")) || (Vector2)i.Get("newPos") == ((Vector2)j.Position))
 				{
 					goto nested_break;
@@ -28,6 +29,11 @@ public class EnemyManager : Node
 
 				
 			}
+
+            if ((Vector2)i.Get("newPos")==((MotionModule)GetParent().FindNode("Player").FindNode("Motion")).newPos)
+            {
+                goto nested_break;
+            }
 
 			TileMap x = (TileMap)GetParent().FindNode("TileMap");
 			if (x.GetCellv(((Vector2)i.Position / 16) + (Vector2)i.Get("velocity")) == 1)

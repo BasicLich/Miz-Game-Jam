@@ -8,7 +8,7 @@ public class MotionModule : Node
     float moveTime = 0.15f;
     bool motionFlag = false;
     float motionPercentage = 0;
-    Vector2 newPos;
+    public Vector2 newPos;
     void motion(float delta, Vector2 PrevPos, Vector2 velocity)
     {
         if (!(velocity.x==0&& velocity.y==0)|| motionFlag == true)
