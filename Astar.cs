@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Numerics;
 
+// CODE BY DAVECUSATIS https://github.com/davecusatis/A-Star-Sharp
+
 namespace AStarSharp
 {
 	public class Node
@@ -111,7 +113,6 @@ namespace AStarSharp
 			// construct path, if end was not closed return null
 			if (!ClosedList.Exists(x => x.Position == end.Position))
 			{
-				GD.Print("aaa");
 				return null;
 			}
 
@@ -119,14 +120,12 @@ namespace AStarSharp
 			Node temp = ClosedList[ClosedList.IndexOf(current)];
 			if (temp == null)
 			{
-				GD.Print("BBB");
 				return null; }
 			do
 			{
 				Path.Push(temp);
 				temp = temp.Parent;
 			} while (temp != start && temp != null);
-			GD.Print("CCC");
 			return Path;
 		}
 

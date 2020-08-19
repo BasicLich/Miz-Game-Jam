@@ -30,6 +30,7 @@ public class EnemyManager : Node
 				
 			}
 
+            //check to make sure enemies intended next position is about to occupied by the player
             if ((Vector2)i.Get("newPos")==((MotionModule)GetParent().FindNode("Player").FindNode("Motion")).newPos)
             {
                 goto nested_break;

@@ -259,8 +259,6 @@ public class TileMap : Godot.TileMap
 
     Vector2 pathfind(Vector2 myPos,Vector2 otherPos)
     {
-        GD.Print(myPos/16);
-        GD.Print(otherPos);
         Stack<AStarSharp.Node> temp=pathfindAstar.FindPath(new Vector2(myPos.x/16,myPos.y/16), new Vector2(otherPos.x,otherPos.y));
 
         return temp.Pop().Position;
@@ -529,7 +527,7 @@ public class Walker
 		Restart:
 		GD.Randomize();
 		int rand=(int)Math.Round(GD.RandRange(0,3));
-		GD.Print("direction: "+rand);
+		//GD.Print("direction: "+rand);
 		//disgusting code, clean later if there's time
 		switch(rand)
 		{
@@ -570,10 +568,10 @@ public class Walker
 		if (lifeLength > minimumLife)
 		{
 			int rand = (int)GD.RandRange(0, 100);
-			GD.Print("chance:" + rand);
+			//GD.Print("chance:" + rand);
 			if ((chance+(lifeLength-minimumLife)*Math.Min(0,20-floorLevel)) > rand)
 			{
-				GD.Print("kill location:" + x + " " + y);
+				//GD.Print("kill location:" + x + " " + y);
 				alive = false;
 				return true;
 			}

@@ -22,11 +22,6 @@ public class Spawner : Node2D
 		node.Set("difficulty", enemyDifficulty);
 		node.Set("hand", monsterHand);
 
-        foreach (Card i in monsterHand)
-        {
-            i.Print();
-        }
-        GD.Print("");
 		GetParent().GetParent().FindNode("Enemies").AddChild(node);
 	}
 
