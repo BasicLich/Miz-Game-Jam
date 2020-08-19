@@ -5,8 +5,6 @@ using System.Collections.Generic;
 public class TileMap : Godot.TileMap
 {
 	[Export]
-	public int floorLevel = 1;
-	[Export]
 	int mapSize = 5;
 
     public List<List<AStarSharp.Node>> tileArray = new List<List<AStarSharp.Node>>(200);
@@ -16,6 +14,8 @@ public class TileMap : Godot.TileMap
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+        int floorLevel = ((Scene)GetParent()).floorLevel;
+
 
 		for (int i = 0; i < 200; i++)
 		{

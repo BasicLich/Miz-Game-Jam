@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Tiles/char.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://MotionModule.cs" type="Script" id=7]
 [ext_resource path="res://EnemyManager.cs" type="Script" id=8]
 [ext_resource path="res://CardDraw.cs" type="Script" id=9]
+[ext_resource path="res://Tiles/selector.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -126,5 +127,11 @@ script = ExtResource( 7 )
 
 [node name="CardDraw" type="Node2D" parent="Player"]
 script = ExtResource( 9 )
+
+[node name="Selector" type="Node2D" parent="Player"]
+
+[node name="Sprite" type="Sprite" parent="Player/Selector"]
+texture = ExtResource( 10 )
+centered = false
 
 [node name="Spawners" type="Node" parent="."]
