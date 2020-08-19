@@ -86,8 +86,8 @@ public class EnemyManager : Node
 
 
 		nested_break:;
-            GD.Print(i.Name + " "+i.velocity);
-        }
+			GD.Print(i.Name + " "+i.velocity);
+		}
 
 	}
 

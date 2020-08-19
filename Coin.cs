@@ -38,7 +38,7 @@ public class Coin : Node2D
 		}
 	}
 
-	void checkForCollection(Vector2 dontUse, Vector2 playerLoc)
+	void checkForCollection(Vector2 playerLoc)
 	{
 		if (playerLoc == (Position / 16))
 		{

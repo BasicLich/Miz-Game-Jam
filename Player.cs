@@ -5,7 +5,7 @@ public class Player : KinematicBody2D
 {
 	
 	[Signal]
-	public delegate void PlayerMotion(Vector2 currentLocation,Vector2 newLocation);
+	public delegate void PlayerMotion(Vector2 newLocation);
 
 	[Signal]
 	public delegate void CardAttack(Attack attack);
@@ -35,8 +35,8 @@ public class Player : KinematicBody2D
 		GetInput();
 
 		TileMap x = (TileMap)GetNode("../TileMap");
-        Node target = checkTileForEnemy();
-        if (velocity != new Vector2(0, 0) && target == null)
+		Node target = checkTileForEnemy();
+		if (velocity != new Vector2(0, 0) && target == null)
 			{
 			((EnemyManager)GetParent().FindNode("Enemies")).moveEnemies(Position / 16, Position / 16 + velocity);
 		}
@@ -44,13 +44,14 @@ public class Player : KinematicBody2D
 		{
 			((EnemyManager)GetParent().FindNode("Enemies")).moveEnemies(Position / 16, Position / 16 );
 		}
-         target = checkTileForEnemy();
-        if (target != null)
-        {
-            GD.Print(target.Name);
-        }
-        if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null && velocity!=new Vector2(0,0)) || (bool)FindNode("Motion").Get("motionFlag"))
+		 target = checkTileForEnemy();
+		if (target != null)
 		{
+			GD.Print(target.Name);
+		}
+		if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null && velocity!=new Vector2(0,0)) || (bool)FindNode("Motion").Get("motionFlag"))
+		{
+			EmitSignal(nameof(PlayerMotion), Position/16+velocity);
 			FindNode("Motion").Call("motion", delta, Position, velocity);
 		}
 		else if ((x.GetCellv((Position / 16) + velocity) == 1) && velocity != new Vector2(0, 0))
