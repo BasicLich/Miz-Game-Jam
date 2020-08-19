@@ -37,6 +37,10 @@ public class Player : KinematicBody2D
             }
             GD.Print("");
         }
+        if(Input.IsKeyPressed(16777217))
+        {
+            GetTree().Quit();
+        }
 
 		if (Input.IsActionJustPressed("right"))
 		{
