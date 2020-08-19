@@ -77,7 +77,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
 [node name="Scene" type="Node"]
 script = ExtResource( 5 )
-floorLevel = 1
+floorLevel = 10
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

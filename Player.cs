@@ -14,47 +14,49 @@ public class Player : KinematicBody2D
 	int MoveTimeout = 0;
 	public int selectedCardIndex = 0;
 	int HoldCount;
-
 	public override void _Ready()
 	{
 		setSelectorPos();
 	}
 
-    public override void _Process(float delta)
-    {
+	public override void _Process(float delta)
+	{
 
-        if (MoveTimeout > 0)
-        {
-            MoveTimeout -= 1;
-        }
+		if (MoveTimeout > 0)
+		{
+			MoveTimeout -= 1;
+		}
 
-        GetInput();
+		GetInput();
 
-        TileMap x = (TileMap)GetNode("../TileMap");
-        Node target = checkTileForEnemy();
-        if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null) || (bool)FindNode("Motion").Get("motionFlag"))
-        {
-            FindNode("Motion").Call("motion", delta, Position, velocity);
-        }
-        else
-        { GD.Print("ATTACK"); }
+		TileMap x = (TileMap)GetNode("../TileMap");
+		Node target = checkTileForEnemy();
+		if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null) || (bool)FindNode("Motion").Get("motionFlag"))
+		{
+			FindNode("Motion").Call("motion", delta, Position, velocity);
+		}
+		else if ((x.GetCellv((Position / 16) + velocity) == 1))
+		{ GD.Print("ATTACK");
+			EmitSignal(nameof(Player.PlayerMotion), Position / 16, Position/16);
+			//TODO USE ATTACK
+		}
 
-        ((Camera2D)FindNode("Camera2D")).Align();
-    }
+		((Camera2D)FindNode("Camera2D")).Align();
+	}
 
-    Node checkTileForEnemy()
-    {
-        foreach (Node2D i in GetParent().FindNode("Enemies").GetChildren())
-        {
-            if (i.Position== (Position + (velocity*16)))
-            {
-                return i;
-            }
-        }
-        return null;
-    }
+	Node checkTileForEnemy()
+	{
+		foreach (Node2D i in GetParent().FindNode("Enemies").GetChildren())
+		{
+			if (i.Position== (Position + (velocity*16)))
+			{
+				return i;
+			}
+		}
+		return null;
+	}
 
-    public void GetInput()
+	public void GetInput()
 	{
 		velocity = new Vector2();
 

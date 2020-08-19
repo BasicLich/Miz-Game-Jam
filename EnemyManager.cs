@@ -4,42 +4,53 @@ using System.Collections.Generic;
 public class EnemyManager : Node
 {
 
-	public void moveEnemies(Vector2 dontUse, Vector2 playerLoc)
+	public void moveEnemies(Vector2 playerCurrentPos, Vector2 playerNextPos)
 	{
 
 		foreach (Node2D i in GetChildren())
 		{   
-			i.Call("choosePath", playerLoc);
+			i.Call("choosePath", playerNextPos);
 		}
 
 		foreach (Node2D i in GetChildren())
 		{
-			foreach (Node2D j in GetChildren())
+
+            //check to make sure enemies intended next position is about to occupied by the player
+            if ((playerCurrentPos != playerNextPos) && playerNextPos * 16 == (Vector2)i.Get("newPos"))
+            {
+                goto nested_break;
+            }
+            else if (playerNextPos * 16 == (Vector2)i.Get("newPos"))
+            {
+                GD.Print(i.Name + " ATTACK");
+                goto nested_break;
+            }
+
+            foreach (Node2D j in GetChildren())
 			{
 				if (i==j)
 				{
 					continue;
 				}
-				
+
                 //check to make sure its not trying to move to a tile currently or about to be occupied by an enemy
-				if ((Vector2)i.Get("newPos") == ((Vector2)j.Get("newPos")) || (Vector2)i.Get("newPos") == ((Vector2)j.Position))
-				{
-					goto nested_break;
-				}
+                
+                if ((Vector2)i.Get("newPos") == ((Vector2)j.Get("newPos")) || (Vector2)i.Get("newPos") == ((Vector2)j.Position))
+                {
+                    GD.Print("oops");
+                    goto nested_break;
+                }
+                
 
 				
 			}
 
-            //check to make sure enemies intended next position is about to occupied by the player
-            if ((Vector2)i.Get("newPos")==((MotionModule)GetParent().FindNode("Player").FindNode("Motion")).newPos)
-            {
-                goto nested_break;
-            }
+
 
 			TileMap x = (TileMap)GetParent().FindNode("TileMap");
 			if (x.GetCellv(((Vector2)i.Position / 16) + (Vector2)i.Get("velocity")) == 1)
 			{
-				i.Call("checkForTimeout", playerLoc);
+				i.Call("checkForTimeout", playerNextPos);
 
 				if ((bool)i.Get("timeout"))
 				{
@@ -50,7 +61,6 @@ public class EnemyManager : Node
 
 		nested_break:;
 		}
-
 
 	}
 

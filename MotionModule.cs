@@ -9,6 +9,7 @@ public class MotionModule : Node
     bool motionFlag = false;
     float motionPercentage = 0;
     public Vector2 newPos;
+    public Vector2 prevPosition;
     void motion(float delta, Vector2 PrevPos, Vector2 velocity)
     {
         if (!(velocity.x==0&& velocity.y==0)|| motionFlag == true)
@@ -24,7 +25,7 @@ public class MotionModule : Node
             }
             if (motionPercentage == 0)
             {
-
+                prevPosition = PrevPos;
                 newPos = PrevPos + 16 * velocity;
                 if (GetParent().Name == "Player")
                 {
