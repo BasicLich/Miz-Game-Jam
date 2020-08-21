@@ -55,6 +55,23 @@ public class CardAndSpawnManager : Node
 
         Godot.Collections.Array spawners = GetParent().GetNode("../Spawners").GetChildren();
 
+        //spawn the exit door
+        while(true)
+        {
+            int randomIndex = (int)Math.Round(GD.RandRange(0, spawners.Count - 1));
+            Spawner chosenSpawner = ((Spawner)spawners[randomIndex]);
+            if (chosenSpawner.treasureRoomSpawner)
+            {
+                var scene = GD.Load<PackedScene>("res://ExitDoor.tscn");
+                var node = scene.Instance();
+                ((Node2D)node).Position = chosenSpawner.Position;
+                GD.Print(chosenSpawner.Position);
+                chosenSpawner.EnemySpawned = true;
+                GetParent().AddChild(node);
+                break;
+            }
+        }
+
         //spawn in the monsters
 
         //for each monster difficulty
@@ -79,7 +96,7 @@ public class CardAndSpawnManager : Node
 
                     //sort the cards TODO implement trump logic
 
-                    monsterHand.Sort((x, y) => x.value.CompareTo(y.value));
+                    monsterHand.Sort((y, x) => x.value.CompareTo(y.value));
 
                     foreach(Card k in monsterHand)
                     {

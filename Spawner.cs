@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Spawner : Node2D
 {
 	public bool EnemySpawned=false;
-	
+	public bool treasureRoomSpawner;
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -29,12 +29,21 @@ public class Spawner : Node2D
 	{
 		if(!EnemySpawned)
 		{
-			if((int)Math.Round(GD.RandRange(0, 1))==0)
+            int chance;
+            if (treasureRoomSpawner)
+            { chance = 60; }
+            else { chance = 45; }
+			if((int)Math.Round(GD.RandRange(0, 100))<chance)
 			{
 				var scene = GD.Load<PackedScene>("res://Coin.tscn");
 				var node = scene.Instance();
 				((Node2D)node).Position = Position;
-				if ((int)Math.Round(GD.RandRange(0, 4)) == 0)
+
+                if (treasureRoomSpawner)
+                { chance = 35; }
+                else { chance = 25; }
+
+                if ((int)Math.Round(GD.RandRange(0, 100)) < chance)
 				{
 					node.Call("setType", 1);
 				}

@@ -239,16 +239,24 @@ public class TileMap : Godot.TileMap
 				}
 
 
-				if (roomHolder[x][y] == 0 || roomHolder[x][y] == 2)
+				if (roomHolder[x][y] != 1)
 				{
 
 					SetCell(i + 11 * roomX, j + 11 * roomY, 1);
 					tileArray[i + 11 * roomX][j + 11 * roomY] = new AStarSharp.Node(new Vector2(i + 11 * roomX,j + 11 * roomY), true);
 
-					if (roomHolder[x][y] == 2)
+					if (roomHolder[x][y] == 2 || roomHolder[x][y]==3)
 					{
 						var scene = GD.Load<PackedScene>("res://Spawner.tscn");
 						var node = scene.Instance();
+                        if (roomHolder[x][y]==2)
+                        {
+                            ((Spawner)node).treasureRoomSpawner = false;
+                        }
+                        else
+                        {
+                            ((Spawner)node).treasureRoomSpawner = true;
+                        }
 						((Node2D)node).Position = new Vector2(16*(i + 11 * roomX), 16*(j + 11 * roomY));
 						GetNode("../Spawners").AddChild(node);
 					}
@@ -442,43 +450,43 @@ public class RoomGen
 
 		treasureRooms[0] = new int[][]{
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-			new int[]{ 1,0,0,0,0,2,0,0,0,0,1},
-			new int[]{ 1,0,2,0,0,0,0,0,0,0,1},
-			new int[]{ 1,0,0,1,1,0,1,1,2,0,1},
+			new int[]{ 1,0,0,0,0,3,0,0,0,0,1},
+			new int[]{ 1,0,3,0,0,0,0,0,0,0,1},
+			new int[]{ 1,0,0,1,1,0,1,1,3,0,1},
 			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
-			new int[]{ 1,2,0,0,0,2,0,0,0,2,1},
+			new int[]{ 1,3,0,0,0,3,0,0,0,3,1},
 			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
 			new int[]{ 1,0,0,1,1,0,1,1,0,0,1},
-			new int[]{ 1,0,2,0,0,0,0,0,2,0,1},
-			new int[]{ 1,0,0,0,0,2,0,0,0,0,1},
+			new int[]{ 1,0,3,0,0,0,0,0,3,0,1},
+			new int[]{ 1,0,0,0,0,3,0,0,0,0,1},
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
 		};
 
 		treasureRooms[1] = new int[][]{
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-			new int[]{ 1,2,0,0,0,2,0,0,0,2,1},
+			new int[]{ 1,3,0,0,0,3,0,0,0,3,1},
 			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
 			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
 			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
-			new int[]{ 1,2,0,0,0,2,0,0,0,2,1},
+			new int[]{ 1,3,0,0,0,3,0,0,0,3,1},
 			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
 			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
 			new int[]{ 1,0,1,1,1,0,1,1,1,0,1},
-			new int[]{ 1,2,0,0,0,2,0,0,0,2,1},
+			new int[]{ 1,3,0,0,0,3,0,0,0,3,1},
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
 		};
 
 		treasureRooms[2] = new int[][]{
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1},
-			new int[]{ 1,2,0,0,0,0,0,0,0,2,1},
-			new int[]{ 1,0,0,0,0,2,0,0,0,0,1},
+			new int[]{ 1,3,0,0,0,0,0,0,0,3,1},
+			new int[]{ 1,0,0,0,0,3,0,0,0,0,1},
 			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
 			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
-			new int[]{ 1,0,2,1,1,2,0,0,2,0,1},
+			new int[]{ 1,0,3,1,1,3,0,0,3,0,1},
 			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
 			new int[]{ 1,0,0,1,1,1,1,1,0,0,1},
-			new int[]{ 1,0,0,0,0,2,0,0,0,0,1},
-			new int[]{ 1,2,0,0,0,0,0,0,0,2,1},
+			new int[]{ 1,0,0,0,0,3,0,0,0,0,1},
+			new int[]{ 1,3,0,0,0,0,0,0,0,3,1},
 			new int[]{ 1,1,1,1,1,1,1,1,1,1,1}
 		};
 	}

@@ -5,7 +5,8 @@ public class Scene : Node
 {
 	[Export]
 	public int floorLevel=3;
-
+	[Export]
+	public int difficulty = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
