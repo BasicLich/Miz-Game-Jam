@@ -22,6 +22,8 @@ public class Player : KinematicBody2D
 	{
 		health = 5;
 		setSelectorPos();
+		GetTree().Root.Connect("size_changed", this, "setSelectorPos");
+
 	}
 
 	public override void _Process(float delta)
@@ -109,6 +111,7 @@ public class Player : KinematicBody2D
 		{
 			HoldCount = 0;
 		}
+
 
 		if(Input.IsKeyPressed(90))
 		{

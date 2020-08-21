@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Tiles/char.png" type="Texture" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://CardDraw.cs" type="Script" id=9]
 [ext_resource path="res://Tiles/selector.png" type="Texture" id=10]
 [ext_resource path="res://AttackManager.cs" type="Script" id=11]
-[ext_resource path="res://Tiles/cardbackdrop.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -82,10 +81,6 @@ script = ExtResource( 5 )
 floorLevel = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Sprite" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 85, 54 )
-texture = ExtResource( 12 )
 
 [node name="Score" type="Label" parent="CanvasLayer"]
 anchor_left = 0.005
