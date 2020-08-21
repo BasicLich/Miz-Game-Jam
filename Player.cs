@@ -36,7 +36,12 @@ public class Player : KinematicBody2D
             {
                 Global.floorLevel += 1;
                 Global.score = score;
-                 GetTree().ReloadCurrentScene();
+                if (Global.floorLevel>5-Global.difficulty*5)
+                {
+                    GD.Print("win");
+                    //TODO WIN STATE
+                }
+                GetTree().ReloadCurrentScene();
              }
         }
 
@@ -236,14 +241,20 @@ public class Player : KinematicBody2D
 	}
 
 	
-
+    //its reasonable to merge these two functions in the refactor
 	public void takeDamage(int amount)
 	{
 		health -= amount;
 	   ((Label)GetParent().FindNode("CanvasLayer").FindNode("Health")).Text = "Health: "+health.ToString();
 	}
 
-	public void increaseScore(int value)
+    public void increaseHealth()
+    {
+        health++;
+        ((Label)GetParent().FindNode("CanvasLayer").FindNode("Health")).Text = "Health: " + health.ToString();
+    }
+
+    public void increaseScore(int value)
 	{
 		score += value;
 		((Label)GetParent().FindNode("CanvasLayer").FindNode("Score")).Text = "Score: "+score.ToString();
@@ -253,5 +264,7 @@ public class Player : KinematicBody2D
 	{
 		((Node2D)FindNode("Selector")).Position = ((CardDraw)FindNode("CardDraw")).baseLoc() + ((CardDraw)FindNode("CardDraw")).CardGUIOffset((selectedCardIndex));
 	}
+
+ 
 
 }

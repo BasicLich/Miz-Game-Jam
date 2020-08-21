@@ -10,16 +10,19 @@ public class Coin : Node2D
 	int gemValue = 50;
 	[Signal]
 	public delegate void CoinCollected(int value);
+    [Signal]
+    public delegate void HeartCollected();
 
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
+    // Declare member variables here. Examples:
+    // private int a = 2;
+    // private string b = "text";
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 		Connect("CoinCollected", GetParent().GetParent().FindNode("Player"), "increaseScore");
-	}
+        Connect("HeartCollected", GetParent().GetParent().FindNode("Player"), "increaseHealth");
+    }
 
 	public void setType(int type)
 	{
@@ -36,15 +39,34 @@ public class Coin : Node2D
 			var coin_tex = GD.Load<Texture>("res://Tiles/gem.png");
 			((Sprite)GetNode("Sprite")).Texture = coin_tex;
 		}
-	}
+        else if (type == 2)
+        {
+            selfValue = 0;
+            var tex = GD.Load<Texture>("res://Tiles/heart.png");
+            ((Sprite)GetNode("Sprite")).Texture = tex;
+        }
+    }
 
 	void checkForCollection(Vector2 playerLoc)
 	{
 		if (playerLoc == (Position / 16))
 		{
 			//TODO Play sound
-			EmitSignal(nameof(CoinCollected), selfValue);
-			QueueFree();
+			
+            if (selfValue==0)
+            {
+                if (((Player)GetNode("/root/Scene/Player")).health < 5)
+                {
+                    EmitSignal(nameof(HeartCollected));
+                    QueueFree();
+                }
+            }
+            else
+            {
+                EmitSignal(nameof(CoinCollected), selfValue);
+                QueueFree();
+            }
+			
 		}
 	}
 
