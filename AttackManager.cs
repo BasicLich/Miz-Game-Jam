@@ -37,7 +37,7 @@ public class AttackManager : Node2D
 			int opponentIndex=100;
 			for (int i = 0; i < attacks.Count - 1; i++)
 			{
-				if (attacks[i].attackeeName == "Player")
+				if (attacks[i].attackerName == attacks[attacks.Count-1].attackeeName)
 				{
 					opponentIndex = i;
 					break;
