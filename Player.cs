@@ -21,6 +21,8 @@ public class Player : KinematicBody2D
 	public override void _Ready()
 	{
 		health = 5;
+        score = Global.score;
+        increaseScore(0);
 		setSelectorPos();
 		GetTree().Root.Connect("size_changed", this, "setSelectorPos");
 
@@ -28,9 +30,19 @@ public class Player : KinematicBody2D
 
 	public override void _Process(float delta)
 	{
+        if (GetParent().FindNode("TileMap").HasNode("ExitDoor"))
+        {
+             if (Position == ((Node2D)GetNode("/root/Scene/TileMap/ExitDoor")).Position)
+            {
+                Global.floorLevel += 1;
+                Global.score = score;
+                 GetTree().ReloadCurrentScene();
+             }
+        }
+
 
 		GetInput();
-        MoveTimeout += delta;
+		MoveTimeout += delta;
 		if (HoldCount==1 || HoldCount>20 && MoveTimeout>0.2)
 		{
 
@@ -49,7 +61,7 @@ public class Player : KinematicBody2D
 		if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null && velocity!=new Vector2(0,0)))
 		{
 			EmitSignal(nameof(PlayerMotion), Position/16+velocity);
-            MoveTimeout = 0;
+			MoveTimeout = 0;
 			((MotionModule)FindNode("Motion")).motionFlag = true;
 		}
 
@@ -74,7 +86,7 @@ public class Player : KinematicBody2D
 			FindNode("Motion").Call("motion", delta, Position, velocity);
 		}
 		((Camera2D)FindNode("Camera2D")).Align();
-        GD.Print(HoldCount);
+
 	}
 
 	Node checkTileForEnemy()
@@ -109,7 +121,7 @@ public class Player : KinematicBody2D
 		{
 			HoldCount = 0;
 		}
-    
+	
 
 		if(Input.IsKeyPressed(90))
 		{
@@ -196,9 +208,9 @@ public class Player : KinematicBody2D
 		{
 			HoldCount +=1;
 		}
-        
-            velocity = new Vector2();
-        
+		
+			velocity = new Vector2();
+		
 
 		if (Input.IsActionPressed("right"))
 		{

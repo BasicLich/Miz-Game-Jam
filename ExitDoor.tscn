@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Tiles/ladder.png" type="Texture" id=1]
 
-[node name="Node" type="Node2D"]
+[node name="ExitDoor" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

@@ -20,6 +20,10 @@ run/main_scene="res://Main.tscn"
 boot_splash/image="res://splash2.png"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Global.cs"
+
 [importer_defaults]
 
 texture={

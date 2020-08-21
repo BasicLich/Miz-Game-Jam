@@ -14,7 +14,7 @@ public class TileMap : Godot.TileMap
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		int floorLevel = ((Scene)GetParent()).floorLevel;
+		int floorLevel = Global.floorLevel;
 
 
 		for (int i = 0; i < 200; i++)

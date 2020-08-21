@@ -69,6 +69,8 @@
     <Compile Include="Coin.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyManager.cs" />
+    <Compile Include="Floor.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="MotionModule.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
