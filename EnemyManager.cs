@@ -21,7 +21,6 @@ public class EnemyManager : Node
 
 			if ((playerCurrentPos != playerNextPos) && playerNextPos * 16 == i.Position+(i.velocity*16))
 			{
-				GD.Print("oops4");
 				GD.Print(i.Position);
 				GD.Print(i.velocity * 16);
 				i.velocity = new Vector2(0, 0);
@@ -51,7 +50,6 @@ public class EnemyManager : Node
 				//check to make sure its not trying to move to a tile currently or about to be occupied by an enemy
 				if (i.Position+(i.velocity * 16) == j.Position+(j.velocity * 16) || i.Position +(i.velocity * 16) == j.Position)
 				{
-					GD.Print("oops");
 					i.velocity = new Vector2(0, 0);
 					goto nested_break;
 				}
@@ -61,19 +59,27 @@ public class EnemyManager : Node
 		   
 			TileMap x = (TileMap)GetParent().FindNode("TileMap");
 			i.Call("checkForTimeout", playerNextPos);
-			if (x.GetCellv((i.Position / 16) + i.velocity) == 1 && (bool)i.Get("timeout"))
-			{
-			}
-			else
+			if (!(x.GetCellv((i.Position / 16) + i.velocity) == 1 && (bool)i.Get("timeout")))
 			{
 				i.velocity = new Vector2(0, 0);
 			}
 
 
 		nested_break:;
-			GD.Print(i.Name + " "+i.velocity);
 		}
 
+	}
+
+	public void takeDamage(string name)
+	{
+		foreach(Enemy i in GetChildren())
+		{
+			if (i.Name==name)
+			{
+				i.takeDamage();
+
+			}
+		}
 	}
 
 }

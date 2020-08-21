@@ -8,6 +8,7 @@
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+light_mask = -2147483647
 texture = ExtResource( 2 )
 centered = false
 

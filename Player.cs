@@ -220,12 +220,16 @@ public class Player : KinematicBody2D
 
 	
 
-	
+	public void takeDamage(int amount)
+	{
+		health -= amount;
+	   ((Label)GetParent().FindNode("CanvasLayer").FindNode("Health")).Text = "Health: "+health.ToString();
+	}
 
 	public void increaseScore(int value)
 	{
 		score += value;
-		((Label)GetParent().FindNode("CanvasLayer").FindNode("Score")).Text = score.ToString();
+		((Label)GetParent().FindNode("CanvasLayer").FindNode("Score")).Text = "Score: "+score.ToString();
 	}
 
 	void setSelectorPos()

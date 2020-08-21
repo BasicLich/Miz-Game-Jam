@@ -8,23 +8,27 @@ public class CardDraw : Node2D
 	// private string b = "text";
 
 	// Called when the node enters the scene tree for the first time.
-	Texture texture = GD.Load<Texture>("res://Tiles/cards.png");
+	Texture cards = GD.Load<Texture>("res://Tiles/cards.png");
 	Texture back= GD.Load<Texture>("res://Tiles/cardbackdrop.png");
+	Texture usedback = GD.Load<Texture>("res://Tiles/usedcardbackdrop.png");
 	AtlasTexture atlasTexture = new AtlasTexture();
 
 	
 	public override void _Draw()
 	{
 		List<Card> playerHand = ((Player)GetParent()).hand;
-		atlasTexture.Atlas = texture;
+		atlasTexture.Atlas = cards;
 
-		
+		Vector2 screenSize = GetViewport().Size;
+
+
 
 		int count = 0;
 
-
+		DrawTexture(usedback, baseLoc()+new Vector2(0,16*6));
 		DrawTexture(back, baseLoc());
-
+		GD.Print("Draw2" + baseLoc());
+		//draw player hand
 		foreach (Card i in playerHand)
 		{
 
@@ -35,6 +39,19 @@ public class CardDraw : Node2D
 				DrawTexture(atlasTexture, drawLoc);
 				count++;
 
+		}
+
+		//draw used cards
+
+		List<Card> usedCards = ((AttackManager)GetParent().GetParent().GetNode("AttackManager")).usedCards;
+		for(int i= 0;i<usedCards.Count;i++)
+		{
+			if (i < 8)
+			{
+				atlasTexture.Region = new Rect2((usedCards[i].rank - 2) * 16, usedCards[i].suit * 16, 16, 16);
+				Vector2 drawLoc = baseLoc() + new Vector2(i * 16+16, 16 * 7);
+				DrawTexture(atlasTexture, drawLoc);
+			}
 		}
 	}
 
