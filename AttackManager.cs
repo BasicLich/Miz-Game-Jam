@@ -31,41 +31,51 @@ public class AttackManager : Node2D
   {
 		if (attacks.Count > 0)
 		{
-			//Player is always final index of attacks
-			int playerIndex = attacks.Count - 1;
-			//if somehow the if below fails to resolve this will ensure an out of range error is thrown
-			int opponentIndex=100;
-			for (int i = 0; i < attacks.Count - 1; i++)
-			{
-				if (attacks[i].attackerName == attacks[attacks.Count-1].attackeeName)
-				{
-					opponentIndex = i;
-					break;
-				}
-			}
 
-			if (opponentIndex == 100)
-			{
-				EmitSignal(nameof(DamageEnemy), attacks[playerIndex].attackeeName);
-			}
-			else
-			{
-				if (attacks[playerIndex].card.value > attacks[opponentIndex].card.value)
-				{
-					EmitSignal(nameof(DamageEnemy), attacks[opponentIndex].attackerName);
-				}
-				else if (attacks[playerIndex].card.value < attacks[opponentIndex].card.value)
-				{
-					EmitSignal(nameof(DamagePlayer), 1);
-				}
-				//if they are equal, do nothing
-			}
+            //if the player is attacking ie the player has cards
+            if (attacks[attacks.Count - 1].attackerName == "Player")
+            {
+                int playerIndex = attacks.Count - 1;
+                //sentinel value
+                int opponentIndex = 100;
+                for (int i = 0; i < attacks.Count - 1; i++)
+                {
+                    if (attacks[i].attackerName == attacks[attacks.Count - 1].attackeeName)
+                    {
+                        opponentIndex = i;
+                        break;
+                    }
+                }
 
-			//Render any extra attacks against the player
-			if (attacks.Count > 2)
-			{
-				EmitSignal(nameof(DamagePlayer), attacks.Count - 2);
-			}
+                if (opponentIndex == 100)
+                {
+                    EmitSignal(nameof(DamageEnemy), attacks[playerIndex].attackeeName);
+                }
+                else
+                {
+                    if (attacks[playerIndex].card.value > attacks[opponentIndex].card.value)
+                    {
+                        EmitSignal(nameof(DamageEnemy), attacks[opponentIndex].attackerName);
+                    }
+                    else if (attacks[playerIndex].card.value < attacks[opponentIndex].card.value)
+                    {
+                        EmitSignal(nameof(DamagePlayer), 1);
+                    }
+                    //if they are equal, do nothing
+                }
+
+
+                //Render any extra attacks against the player
+                if (attacks.Count > 2)
+                {
+                    EmitSignal(nameof(DamagePlayer), attacks.Count - 2);
+                }
+            }
+            //player has no cards, damage them for the number of attackers attacking the player
+            else
+            {
+                EmitSignal(nameof(DamagePlayer), attacks.Count);
+            }
 
 			foreach (Attack i in attacks)
 			{

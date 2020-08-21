@@ -70,7 +70,7 @@ public class Player : KinematicBody2D
 			((MotionModule)FindNode("Motion")).motionFlag = true;
 		}
 
-		else if ((x.GetCellv((Position / 16) + velocity) == 1) && velocity != new Vector2(0, 0))
+		else if ((x.GetCellv((Position / 16) + velocity) == 1) && velocity != new Vector2(0, 0) && hand.Count > 0)
 		{ GD.Print("ATTACK");
 			EmitSignal(nameof(CardAttack), new Attack(hand[selectedCardIndex], Name, target.Name));
 			
@@ -81,6 +81,10 @@ public class Player : KinematicBody2D
 			if (selectedCardIndex == hand.Count)
 			{
 				selectedCardIndex -= 1;
+                if (hand.Count==0)
+                    {
+                        GetNode("Selector").QueueFree();
+                    }
 				setSelectorPos();
 			}
 		}
