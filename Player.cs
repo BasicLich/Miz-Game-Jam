@@ -15,7 +15,7 @@ public class Player : KinematicBody2D
 	int score = 0;
 	public Vector2 velocity = new Vector2();
 
-	int MoveTimeout = 0;
+	float MoveTimeout = 0;
 	public int selectedCardIndex = 0;
 	int HoldCount;
 	public override void _Ready()
@@ -29,12 +29,10 @@ public class Player : KinematicBody2D
 	public override void _Process(float delta)
 	{
 
-		if (MoveTimeout > 0)
-		{
-			MoveTimeout -= 1;
-		}
-
 		GetInput();
+        MoveTimeout += delta;
+		if (HoldCount==1 || HoldCount>20 && MoveTimeout>0.2)
+		{
 
 		TileMap x = (TileMap)GetNode("../TileMap");
 		Node target = checkTileForEnemy();
@@ -46,16 +44,15 @@ public class Player : KinematicBody2D
 		{
 			((EnemyManager)GetParent().FindNode("Enemies")).moveEnemies(Position / 16, Position / 16 );
 		}
-		 target = checkTileForEnemy();
-		if (target != null)
-		{
-			GD.Print(target.Name);
-		}
-		if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null && velocity!=new Vector2(0,0)) || (bool)FindNode("Motion").Get("motionFlag"))
+		target = checkTileForEnemy();
+
+		if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null && velocity!=new Vector2(0,0)))
 		{
 			EmitSignal(nameof(PlayerMotion), Position/16+velocity);
-			FindNode("Motion").Call("motion", delta, Position, velocity);
+            MoveTimeout = 0;
+			((MotionModule)FindNode("Motion")).motionFlag = true;
 		}
+
 		else if ((x.GetCellv((Position / 16) + velocity) == 1) && velocity != new Vector2(0, 0))
 		{ GD.Print("ATTACK");
 			EmitSignal(nameof(CardAttack), new Attack(hand[selectedCardIndex], Name, target.Name));
@@ -69,10 +66,15 @@ public class Player : KinematicBody2D
 				selectedCardIndex -= 1;
 				setSelectorPos();
 			}
+		}
 			
 		}
-
+		if (((MotionModule)FindNode("Motion")).motionFlag)
+		{
+			FindNode("Motion").Call("motion", delta, Position, velocity);
+		}
 		((Camera2D)FindNode("Camera2D")).Align();
+        GD.Print(HoldCount);
 	}
 
 	Node checkTileForEnemy()
@@ -83,19 +85,16 @@ public class Player : KinematicBody2D
 			//GD.Print((i.Position == (Position + (velocity * 16)))+"  "+i.Position+" "+i.newPos +" "+);
 			if (i.velocity != new Vector2(0,0) && !(i.hand.Count==0) && i.Position == (Position + (velocity * 16)))
 			{
-				GD.Print("a");
 				return i;
 			}
 			else if (i.velocity != new Vector2(0, 0) && i.hand.Count == 0 && i.Position == (Position + (velocity * 32)))
 			{
-				GD.Print("b");
 				return i;
 			}
 		   
 			else if (i.velocity == new Vector2(0, 0) && i.Position == (Position + (velocity * 16)))
 			{
 
-				GD.Print("c");
 				return i;
 			}
 		}
@@ -104,14 +103,13 @@ public class Player : KinematicBody2D
 
 	public void GetInput()
 	{
-		velocity = new Vector2();
 
 		if (!Input.IsActionPressed("right") && !Input.IsActionPressed("left") &&
 			!Input.IsActionPressed("down")&& !Input.IsActionPressed("up"))
 		{
 			HoldCount = 0;
 		}
-
+    
 
 		if(Input.IsKeyPressed(90))
 		{
@@ -194,27 +192,31 @@ public class Player : KinematicBody2D
 
 		}
 
-		if (Input.IsActionJustPressed("right"))
+		if (Input.IsActionPressed("right") || Input.IsActionPressed("left")|| Input.IsActionPressed("up")|| Input.IsActionPressed("down"))
 		{
-			HoldCount += 1;
+			HoldCount +=1;
+		}
+        
+            velocity = new Vector2();
+        
+
+		if (Input.IsActionPressed("right"))
+		{
 			velocity.x += 1;
 			return;
 		}
-		if (Input.IsActionJustPressed("left"))
+		if (Input.IsActionPressed("left"))
 		{
-			HoldCount += 1;
 			velocity.x -= 1;
 			return;
 		}
-		if (Input.IsActionJustPressed("down"))
+		if (Input.IsActionPressed("down"))
 		{
-			HoldCount += 1;
 			velocity.y += 1;
 			return;
 		}
-		if (Input.IsActionJustPressed("up"))
+		if (Input.IsActionPressed("up"))
 		{
-			HoldCount += 1;
 			velocity.y -= 1;
 			return;
 		}   
