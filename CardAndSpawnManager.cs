@@ -27,7 +27,7 @@ public class CardAndSpawnManager : Node
 
 		int floorLevel = Global.floorLevel;
 
-		int playerCards = 26 - (floorLevel - 1);
+		int playerCards = 26 - floorLevel*3;
 		int monsterCards = 52 - playerCards;
 		int tempCardTrack = monsterCards;
 

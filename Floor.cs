@@ -10,7 +10,7 @@ public class Floor : Label
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Text = "Floor: " + (Global.floorLevel - Global.difficulty * 5);
+		Text = "Floor: " + (Global.floorLevel+1 - Global.difficulty * 5);
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

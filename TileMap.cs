@@ -46,6 +46,12 @@ public class TileMap : Godot.TileMap
 
 		for (int i = 0; i < walkerArray.Length; i++) { walkerArray[i] = new Walker(); }
 
+		for(int i=0;i<30;i++)
+		{ GD.Print(i+" chance=" +
+			((50f / 900f) * i * i - (3000f / 900f) * i + 50)); }
+
+		float chance = ((50f / 900f) * floorLevel * floorLevel - (3000f / 900f) * floorLevel + 50);
+
 		while (true)
 		{
 			bool flag = true;
@@ -57,7 +63,7 @@ public class TileMap : Godot.TileMap
 				{
 					flag = false;
 					//attempt to kill the walker. chance decreases per floor level
-					bool result = walkerArray[i].stillAlive((int)((1f / (floorLevel + 2)) * 100),floorLevel);
+					bool result = walkerArray[i].stillAlive(chance,floorLevel);
 
 					//if it was killed make the current room a treasure room
 					if (result)
@@ -249,14 +255,14 @@ public class TileMap : Godot.TileMap
 					{
 						var scene = GD.Load<PackedScene>("res://Spawner.tscn");
 						var node = scene.Instance();
-                        if (roomHolder[x][y]==2)
-                        {
-                            ((Spawner)node).treasureRoomSpawner = false;
-                        }
-                        else
-                        {
-                            ((Spawner)node).treasureRoomSpawner = true;
-                        }
+						if (roomHolder[x][y]==2)
+						{
+							((Spawner)node).treasureRoomSpawner = false;
+						}
+						else
+						{
+							((Spawner)node).treasureRoomSpawner = true;
+						}
 						((Node2D)node).Position = new Vector2(16*(i + 11 * roomX), 16*(j + 11 * roomY));
 						GetNode("../Spawners").AddChild(node);
 					}
@@ -570,14 +576,14 @@ public class Walker
 		}
 	}
 
-	public bool stillAlive(int chance, int floorLevel)
+	public bool stillAlive(float chance, int floorLevel)
 	{
 		lifeLength += 1;
 		if (lifeLength > minimumLife)
 		{
-			int rand = (int)GD.RandRange(0, 100);
-			//GD.Print("chance:" + rand);
-			if ((chance+(lifeLength-minimumLife)*Math.Min(0,20-floorLevel)) > rand)
+			double rand = GD.RandRange(0, 100);
+			GD.Print("chance:" + (chance + ((lifeLength - minimumLife-1) * Math.Max(0, 30 - floorLevel*2.6f))));
+			if (rand < (chance + ((lifeLength - minimumLife - 1) * Math.Max(0, 30 - (floorLevel * 2)))))
 			{
 				//GD.Print("kill location:" + x + " " + y);
 				alive = false;
