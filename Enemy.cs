@@ -110,6 +110,7 @@ public class Enemy : Node2D
 		spriteFlashing = true;
 		if (health<1)
 		{
+			((Player)GetNode("/root/Scene/Player")).increaseScore(20 + 30 * difficulty);
 			QueueFree();
 		}
 	}
