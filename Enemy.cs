@@ -40,8 +40,26 @@ public class Enemy : Node2D
 	{
 		if (Math.Sqrt(Math.Pow(Position.x / 16 - playerLoc.x, 2) + Math.Pow(Position.y / 16 - playerLoc.y, 2)) < (4 + 2 * difficulty))
 		{
-			Vector2 path = (Vector2)GetParent().GetParent().FindNode("TileMap").Call("pathfind", Position, playerLoc);
-			velocity = (-Position + path * 16) / 16;
+			if (hand.Count > 0)
+			{
+				Vector2 path = (Vector2)GetParent().GetParent().FindNode("TileMap").Call("pathfind", Position, playerLoc);
+				velocity = (-Position + path * 16) / 16;
+			}
+			else
+			{
+
+				Vector2 difference = -playerLoc + (Position / 16);
+				if (Math.Abs(difference.x) > Math.Abs(difference.y))
+				{
+					velocity = new Vector2(difference.x / Math.Abs(difference.x), 0);
+				}
+				else
+				{
+					velocity = new Vector2(0, difference.y / Math.Abs(difference.y));
+				}
+				GD.Print(Name + " " + velocity);
+			}
+
 		}
 		else
 		{

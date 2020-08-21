@@ -12,21 +12,6 @@ public class EnemyManager : Node
 		{
 			i.velocity = new Vector2(0, 0);
 			i.Call("choosePath", playerNextPos);
-
-			if (i.hand.Count == 0)
-			{
-				
-				Vector2 difference = -playerCurrentPos + (i.Position / 16);
-				if (Math.Abs(difference.x) > Math.Abs(difference.y))
-				{
-					i.velocity = new Vector2(difference.x / Math.Abs(difference.x), 0);
-				}
-				else
-				{
-					i.velocity = new Vector2(0, difference.y / Math.Abs(difference.y));
-				}
-				GD.Print(i.Name+" "+i.velocity);
-			}
 		}
 
 		foreach (Enemy i in GetChildren())
