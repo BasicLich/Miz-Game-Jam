@@ -36,11 +36,11 @@ public class Player : KinematicBody2D
 
 		TileMap x = (TileMap)GetNode("../TileMap");
 		Node target = checkTileForEnemy();
-		if (velocity != new Vector2(0, 0) && target == null)
+		if (x.GetCellv((Position / 16) + velocity) == 1 && velocity != new Vector2(0, 0) && target == null)
 			{
 			((EnemyManager)GetParent().FindNode("Enemies")).moveEnemies(Position / 16, Position / 16 + velocity);
 		}
-		else if(velocity != new Vector2(0, 0))
+		else if(x.GetCellv((Position / 16) + velocity) == 1 && velocity != new Vector2(0, 0))
 		{
 			((EnemyManager)GetParent().FindNode("Enemies")).moveEnemies(Position / 16, Position / 16 );
 		}
