@@ -50,11 +50,11 @@ public class AttackManager : Node2D
 			}
 			else
 			{
-				if (attacks[playerIndex].card.value-(attacks[playerIndex].card.suit*13) > attacks[opponentIndex].card.value- (attacks[opponentIndex].card.suit * 13))
+				if (attacks[playerIndex].card.value > attacks[opponentIndex].card.value)
 				{
 					EmitSignal(nameof(DamageEnemy), attacks[opponentIndex].attackerName);
 				}
-				else if (attacks[playerIndex].card.value - (attacks[playerIndex].card.suit * 13) < attacks[opponentIndex].card.value - (attacks[opponentIndex].card.suit * 13))
+				else if (attacks[playerIndex].card.value < attacks[opponentIndex].card.value)
 				{
 					EmitSignal(nameof(DamagePlayer), 1);
 				}

@@ -12,7 +12,7 @@ public class Card : Node
         {
             trumpBoost = 1000;
         }
-        value = s * 13 + r + trumpBoost;
+        value = r + trumpBoost;
     }
 
     public void Print()
