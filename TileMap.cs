@@ -27,9 +27,9 @@ public class TileMap : Godot.TileMap
 			}
 		}
 
-		for (int i=-20;i<200;i++)
+		for (int i=-70;i<200;i++)
 		{
-			for (int j = -20; j < 200; j++)
+			for (int j = -70; j < 200; j++)
 			{
 				SetCell(i, j, 0);
 			}
