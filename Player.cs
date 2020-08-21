@@ -10,6 +10,9 @@ public class Player : KinematicBody2D
 	[Signal]
 	public delegate void CardAttack(Attack attack);
 
+    [Signal]
+    public delegate void HealthChange(int health);
+
 	public int health;
 	public List<Card> hand;
 	int score = 0;
@@ -39,7 +42,8 @@ public class Player : KinematicBody2D
                 if (Global.floorLevel>5-Global.difficulty*5)
                 {
                     GD.Print("win");
-                    //TODO WIN STATE
+                    Global.win = true;
+                    GetTree().ChangeScene("res://EndScreen.tscn");
                 }
                 GetTree().ReloadCurrentScene();
              }
@@ -249,13 +253,19 @@ public class Player : KinematicBody2D
 	public void takeDamage(int amount)
 	{
 		health -= amount;
-	   ((Label)GetParent().FindNode("CanvasLayer").FindNode("Health")).Text = "Health: "+health.ToString();
-	}
+
+        if (health==0)
+        {
+            Global.win = false;
+            GetTree().ChangeScene("res://EndScreen.tscn");
+        }
+        EmitSignal(nameof(HealthChange), health);
+    }
 
     public void increaseHealth()
     {
         health++;
-        ((Label)GetParent().FindNode("CanvasLayer").FindNode("Health")).Text = "Health: " + health.ToString();
+        EmitSignal(nameof(HealthChange), health);
     }
 
     public void increaseScore(int value)

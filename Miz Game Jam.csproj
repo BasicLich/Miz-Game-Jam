@@ -71,12 +71,15 @@
     <Compile Include="EnemyManager.cs" />
     <Compile Include="Floor.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="LifeSprite.cs" />
     <Compile Include="MotionModule.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene.cs" />
+    <Compile Include="Score.cs" />
     <Compile Include="Spawner.cs" />
     <Compile Include="TileMap.cs" />
+    <Compile Include="WinLose.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
