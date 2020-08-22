@@ -11,10 +11,7 @@ public class Enemy : Node2D
 	public Vector2 velocity;
 	public List<Card> hand;
 
-	float spriteFlashTime = 0.1f;
-	bool spriteFlashing = false;
-	float spriteFlashPercent = 0;
-
+   
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -107,7 +104,7 @@ public class Enemy : Node2D
 	public void takeDamage()
 	{
 		health--;
-		spriteFlashing = true;
+		((SpriteTransformer)FindNode("Sprite").FindNode("SpriteTransformer")).spriteFlashing = true;
 		if (health<1)
 		{
 			((Player)GetNode("/root/Scene/Player")).increaseScore(20 + 30 * difficulty);
@@ -115,29 +112,11 @@ public class Enemy : Node2D
 		}
 	}
 
-	void spriteFlash(float delta)
-	{
-		float intensity = -Math.Abs((spriteFlashPercent - 0.5f) * 6) + 4;
 
-		((Sprite)FindNode("Sprite")).Modulate = new Color(intensity, intensity, intensity, intensity);
-		spriteFlashPercent += delta / spriteFlashTime;
-
-		if (spriteFlashPercent>1)
-		{
-			spriteFlashPercent = 0;
-			spriteFlashing = false;
-			((Sprite)FindNode("Sprite")).Modulate = new Color(1, 1, 1, 1);
-		}
-	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	 public override void _Process(float delta)
-	  {
-		if (spriteFlashing)
-		{
-			spriteFlash(delta);
-				}
-			FindNode("Motion").Call("motion", GetProcessDeltaTime(), Position, velocity);
-
-  }
+	public override void _Process(float delta)
+	{
+		FindNode("Motion").Call("motion", GetProcessDeltaTime(), Position, velocity);
+	}
 }

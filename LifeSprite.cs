@@ -18,11 +18,17 @@ public class LifeSprite : Sprite
 
 	public void update(int health)
   {
+		Texture oldtex = Texture;
 	  if (health>=value)
 		{
 			Texture = fulltex;
 		}
 	  else
 		{ Texture = emptytex; }
+
+	  if (oldtex!=Texture)
+		{
+			((SpriteTransformer)FindNode("SpriteTransformer")).spriteFlashing = true;
+		}
   }
 }

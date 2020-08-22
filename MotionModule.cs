@@ -39,16 +39,6 @@ public class MotionModule : Node
 				}
 				else
 				{
-					foreach(Node i in GetParent().GetChildren())
-					{
-						if (i!=this)
-						{
-							if (newPos==((Node2D)i).Position)
-							{
-								break;
-							}
-						}
-					}
 				}
 
 				motionFlag = true;

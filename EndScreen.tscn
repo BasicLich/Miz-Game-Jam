@@ -14,10 +14,10 @@ bg_color = Color( 0.129412, 0.0823529, 0.109804, 1 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
-margin_left = -56.0
-margin_top = -37.0
-margin_right = 1069.0
-margin_bottom = 651.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 4096.0
+margin_bottom = 4096.0
 theme = SubResource( 1 )
 custom_styles/panel = SubResource( 2 )
 __meta__ = {

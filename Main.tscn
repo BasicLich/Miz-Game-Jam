@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Tiles/char.png" type="Texture" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Tiles/textbackdrop.png" type="Texture" id=13]
 [ext_resource path="res://Tiles/heartempty.png" type="Texture" id=14]
 [ext_resource path="res://LifeSprite.cs" type="Script" id=15]
+[ext_resource path="res://LifeSprite.tscn" type="PackedScene" id=16]
+[ext_resource path="res://SpriteTransformer.tscn" type="PackedScene" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -116,12 +118,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="1" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 34, 102 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 14 )
-centered = false
-script = ExtResource( 15 )
+[node name="1" parent="CanvasLayer" instance=ExtResource( 16 )]
+
+[node name="SpriteTransformer2" parent="CanvasLayer/1" instance=ExtResource( 17 )]
 
 [node name="2" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 66, 102 )
@@ -130,12 +129,16 @@ texture = ExtResource( 14 )
 centered = false
 script = ExtResource( 15 )
 
+[node name="SpriteTransformer" parent="CanvasLayer/2" instance=ExtResource( 17 )]
+
 [node name="3" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 98, 102 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 14 )
 centered = false
 script = ExtResource( 15 )
+
+[node name="SpriteTransformer" parent="CanvasLayer/3" instance=ExtResource( 17 )]
 
 [node name="4" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 130, 102 )
@@ -144,12 +147,16 @@ texture = ExtResource( 14 )
 centered = false
 script = ExtResource( 15 )
 
+[node name="SpriteTransformer" parent="CanvasLayer/4" instance=ExtResource( 17 )]
+
 [node name="5" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 162, 102 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 14 )
 centered = false
 script = ExtResource( 15 )
+
+[node name="SpriteTransformer" parent="CanvasLayer/5" instance=ExtResource( 17 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 4 )
