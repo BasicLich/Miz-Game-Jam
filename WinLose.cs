@@ -10,7 +10,8 @@ public class WinLose : Label
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		if(Global.win)
+		Global.ingame = false;
+		if (Global.win)
 		{
 			((AudioStreamPlayer)GetNode("/root/Node/Audio/Win")).Play();
 			Text = "You Win!";

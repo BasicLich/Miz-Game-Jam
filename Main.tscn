@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Tiles/char.png" type="Texture" id=2]
@@ -17,14 +17,16 @@
 [ext_resource path="res://LifeSprite.cs" type="Script" id=15]
 [ext_resource path="res://LifeSprite.tscn" type="PackedScene" id=16]
 [ext_resource path="res://SpriteTransformer.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Find_Money.wav" type="AudioStream" id=18]
-[ext_resource path="res://Money.wav" type="AudioStream" id=19]
-[ext_resource path="res://enemy_Death.wav" type="AudioStream" id=20]
-[ext_resource path="res://enemy_Hurt.wav" type="AudioStream" id=21]
-[ext_resource path="res://selfHurt.wav" type="AudioStream" id=22]
-[ext_resource path="res://nes-03-00.wav" type="AudioStream" id=23]
-[ext_resource path="res://nes-04-00.wav" type="AudioStream" id=24]
-[ext_resource path="res://Jump3.wav" type="AudioStream" id=25]
+[ext_resource path="res://Sounds/Money.wav" type="AudioStream" id=18]
+[ext_resource path="res://Sounds/Jump3.wav" type="AudioStream" id=19]
+[ext_resource path="res://Sounds/enemy_Hurt.wav" type="AudioStream" id=20]
+[ext_resource path="res://Sounds/Find_Money.wav" type="AudioStream" id=21]
+[ext_resource path="res://Sounds/selfHurt.wav" type="AudioStream" id=22]
+[ext_resource path="res://Sounds/nes-03-00.wav" type="AudioStream" id=23]
+[ext_resource path="res://Sounds/nes-04-00.wav" type="AudioStream" id=24]
+[ext_resource path="res://Sounds/enemy_Death.wav" type="AudioStream" id=25]
+[ext_resource path="res://Score.tscn" type="PackedScene" id=26]
+[ext_resource path="res://music.wav" type="AudioStream" id=27]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -101,17 +103,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 13 )
 centered = false
 
-[node name="Score" type="Label" parent="CanvasLayer"]
-anchor_right = 10.0
-anchor_bottom = 10.0
-margin_left = 36.0
-margin_top = 34.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.811765, 0.776471, 0.721569, 1 )
-text = "Score: 0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Score" parent="CanvasLayer" instance=ExtResource( 26 )]
 
 [node name="Floor" type="Label" parent="CanvasLayer"]
 anchor_right = 10.0
@@ -219,16 +211,16 @@ script = ExtResource( 11 )
 [node name="Audio" type="Node" parent="."]
 
 [node name="FindCoin" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 18 )
+stream = ExtResource( 21 )
 
 [node name="FindGem" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 19 )
+stream = ExtResource( 18 )
 
 [node name="FindHeart" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 25 )
+stream = ExtResource( 19 )
 
 [node name="MonsterHurt" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 21 )
+stream = ExtResource( 20 )
 
 [node name="SelfHurt" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 22 )
@@ -238,7 +230,9 @@ stream = ExtResource( 23 )
 
 [node name="Draw" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 24 )
-volume_db = 10.0
+
+[node name="Floor1" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 27 )
 
 [node name="MonsterDead" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 20 )
+stream = ExtResource( 25 )

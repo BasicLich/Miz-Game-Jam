@@ -72,6 +72,7 @@
     <Compile Include="Floor.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="LifeSprite.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="MotionModule.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Score.cs" />
     <Compile Include="Spawner.cs" />
     <Compile Include="SpriteTransformer.cs" />
+    <Compile Include="ClickableMenu.cs" />
     <Compile Include="TileMap.cs" />
     <Compile Include="WinLose.cs" />
   </ItemGroup>

@@ -4,11 +4,9 @@
 [ext_resource path="res://Score.cs" type="Script" id=2]
 [ext_resource path="res://WinLose.cs" type="Script" id=3]
 [ext_resource path="res://lose.wav" type="AudioStream" id=4]
+[ext_resource path="res://BackgroundStyle.tres" type="StyleBox" id=5]
 
 [sub_resource type="Theme" id=1]
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.129412, 0.0823529, 0.109804, 1 )
 
 [node name="Node" type="Node"]
 
@@ -20,7 +18,7 @@ anchor_bottom = 1.0
 margin_right = 4096.0
 margin_bottom = 4096.0
 theme = SubResource( 1 )
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

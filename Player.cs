@@ -165,7 +165,7 @@ public class Player : KinematicBody2D
 			GetTree().Quit();
 		}
 
-		if(Input.IsActionJustPressed("ui_right"))
+		if(Input.IsActionJustPressed("card_right"))
 		{
 			if((selectedCardIndex+1)%8==0)
 			{
@@ -181,7 +181,7 @@ public class Player : KinematicBody2D
 
 		}
 
-		if (Input.IsActionJustPressed("ui_left"))
+		if (Input.IsActionJustPressed("card_left"))
 		{
 			if (!(selectedCardIndex % 8 == 0))
 			{
@@ -199,7 +199,7 @@ public class Player : KinematicBody2D
 
 		}
 
-		if (Input.IsActionJustPressed("ui_down"))
+		if (Input.IsActionJustPressed("card_down"))
 		{
 			if ((selectedCardIndex + 8)> hand.Count-1)
 			{
@@ -213,7 +213,7 @@ public class Player : KinematicBody2D
 
 		}
 
-		if (Input.IsActionJustPressed("ui_up"))
+		if (Input.IsActionJustPressed("card_up"))
 		{
 			if ((selectedCardIndex - 8) < 0)
 			{

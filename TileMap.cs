@@ -7,6 +7,7 @@ public class TileMap : Godot.TileMap
 	[Export]
 	int mapSize = 5;
 
+    
 	public List<List<AStarSharp.Node>> tileArray = new List<List<AStarSharp.Node>>(200);
 
 	public AStarSharp.Astar pathfindAstar;
@@ -15,6 +16,8 @@ public class TileMap : Godot.TileMap
 	public override void _Ready()
 	{
 		int floorLevel = Global.floorLevel;
+        Global.ingame = true;
+
 
 
 		for (int i = 0; i < 200; i++)
