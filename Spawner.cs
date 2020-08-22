@@ -33,7 +33,7 @@ public class Spawner : Node2D
             if (treasureRoomSpawner)
             { chance = 60; }
             else { chance = 45; }
-			if((int)Math.Round(GD.RandRange(0, 100))<chance)
+			if((int)Math.Round(GD.RandRange(-0.5, 100.49))<chance)
 			{
 				var scene = GD.Load<PackedScene>("res://Coin.tscn");
 				var node = scene.Instance();

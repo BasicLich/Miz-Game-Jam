@@ -58,7 +58,7 @@ public class CardAndSpawnManager : Node
 		//spawn the exit door
 		while(true)
 		{
-			int randomIndex = (int)Math.Round(GD.RandRange(0, spawners.Count - 1));
+			int randomIndex = (int)Math.Round(GD.RandRange(-0.5, spawners.Count - 1+0.49));
 			Spawner chosenSpawner = ((Spawner)spawners[randomIndex]);
 			if (chosenSpawner.treasureRoomSpawner)
 			{

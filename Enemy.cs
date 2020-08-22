@@ -64,7 +64,7 @@ public class Enemy : Node2D
 		}
 		else
 		{
-			int rand = (int)Math.Round(GD.RandRange(0, 3));
+			int rand = (int)Math.Round(GD.RandRange(-0.5, 3.49));
 			velocity = new Vector2(0, 0);
 			switch (rand)
 			{

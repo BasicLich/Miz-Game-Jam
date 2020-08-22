@@ -155,7 +155,7 @@ public class TileMap : Godot.TileMap
 					{
 
 						//create a door width
-						int rand = (int)Math.Round(GD.RandRange(1, 5));
+						int rand = (int)Math.Round(GD.RandRange(0.5, 5.49));
 
 						for (int k=rand; k<11-rand;k++)
 						{
@@ -170,7 +170,7 @@ public class TileMap : Godot.TileMap
 					if (!(dungeonRoomGrid[i, j+1] == 0))
 					{
 						//create a door width
-						int rand = (int)Math.Round(GD.RandRange(1, 5));
+						int rand = (int)Math.Round(GD.RandRange(0.5, 5.49));
 
 						for (int k = rand; k < 11-rand; k++)
 						{
@@ -210,7 +210,7 @@ public class TileMap : Godot.TileMap
 	{
 		//ROTATION
 
-		int rand = (int)Math.Round(GD.RandRange(0, 3));
+		int rand = (int)Math.Round(GD.RandRange(-0.5, 3.49));
 
 		int x;
 		int y;
@@ -504,12 +504,12 @@ public class RoomGen
 		switch (roomType)
 		{
 			case 1:
-				rand= (int)Math.Round(GD.RandRange(0, 11));
+				rand= (int)Math.Round(GD.RandRange(-0.5, 11.49));
 				//GD.Print("room" + rand);
 				return mainRooms[rand];
 
 			case 2:
-				rand = (int)Math.Round(GD.RandRange(0, 2));
+				rand = (int)Math.Round(GD.RandRange(-0.5, 2.49));
 				return treasureRooms[rand];
 
 			case 3:
@@ -540,7 +540,7 @@ public class Walker
 	{
 		Restart:
 		GD.Randomize();
-		int rand=(int)Math.Round(GD.RandRange(0,3));
+		int rand=(int)Math.Round(GD.RandRange(-0.5f,3.49f));
 		//GD.Print("direction: "+rand);
 		//disgusting code, clean later if there's time
 		switch(rand)
@@ -581,7 +581,7 @@ public class Walker
 		lifeLength += 1;
 		if (lifeLength > minimumLife)
 		{
-			double rand = GD.RandRange(0, 100);
+			double rand = GD.RandRange(-0.5, 100.49);
 			GD.Print("chance:" + (chance + ((lifeLength - minimumLife-1) * Math.Max(0, 30 - floorLevel*2.6f))));
 			if (rand < (chance + ((lifeLength - minimumLife - 1) * Math.Max(0, 30 - (floorLevel * 2)))))
 			{
