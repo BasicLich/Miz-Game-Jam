@@ -271,6 +271,7 @@ public class Player : KinematicBody2D
         ((AudioStreamPlayer)GetNode("/root/Scene/Audio/SelfHurt")).Play();
         if (health==0)
         {
+            Global.score = score;
             Global.win = false;
             GetTree().ChangeScene("res://EndScreen.tscn");
         }
