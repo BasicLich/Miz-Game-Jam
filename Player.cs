@@ -39,13 +39,16 @@ public class Player : KinematicBody2D
             {
                 Global.floorLevel += 1;
                 Global.score = score;
-                if (Global.floorLevel>5)
+                if (Global.floorLevel > 4)
                 {
                     GD.Print("win");
                     Global.win = true;
                     GetTree().ChangeScene("res://EndScreen.tscn");
                 }
-                GetTree().ReloadCurrentScene();
+                else
+                {
+                    GetTree().ReloadCurrentScene();
+                }
              }
         }
 
