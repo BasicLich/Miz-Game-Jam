@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/selfHurt.wav-b67a8b11d37f5d3177b5821e9ff94d41.sample"
+
+[deps]
+
+source_file="res://selfHurt.wav"
+dest_files=[ "res://.import/selfHurt.wav-b67a8b11d37f5d3177b5821e9ff94d41.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

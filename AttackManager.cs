@@ -61,7 +61,12 @@ public class AttackManager : Node2D
                     {
                         EmitSignal(nameof(DamagePlayer), 1);
                     }
-                    //if they are equal, do nothing
+                    else
+                    {
+                        ((AudioStreamPlayer)GetNode("/root/Scene/Audio/Draw")).PitchScale = (float)GD.RandRange(0.9, 1.1);
+                        ((AudioStreamPlayer)GetNode("/root/Scene/Audio/Draw")).Play();
+                    }
+
                 }
 
 

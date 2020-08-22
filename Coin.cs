@@ -57,12 +57,24 @@ public class Coin : Node2D
             {
                 if (((Player)GetNode("/root/Scene/Player")).health < 5)
                 {
+                    ((AudioStreamPlayer)GetNode("/root/Scene/Audio/FindHeart")).PitchScale = (float)GD.RandRange(0.9, 1.1);
+                    ((AudioStreamPlayer)GetNode("/root/Scene/Audio/FindHeart")).Play();
                     EmitSignal(nameof(HeartCollected));
                     QueueFree();
                 }
             }
             else
             {
+                if(selfValue==gemValue)
+                {
+                    ((AudioStreamPlayer)GetNode("/root/Scene/Audio/FindGem")).PitchScale = (float)GD.RandRange(0.9, 1.1);
+                    ((AudioStreamPlayer)GetNode("/root/Scene/Audio/FindGem")).Play();
+                }
+                else
+                {
+                    ((AudioStreamPlayer)GetNode("/root/Scene/Audio/FindCoin")).PitchScale = (float)GD.RandRange(0.9, 1.1);
+                    ((AudioStreamPlayer)GetNode("/root/Scene/Audio/FindCoin")).Play();
+                }
                 EmitSignal(nameof(CoinCollected), selfValue);
                 QueueFree();
             }

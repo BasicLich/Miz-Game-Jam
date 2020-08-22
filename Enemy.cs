@@ -15,6 +15,7 @@ public class Enemy : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		((Timer)FindNode("Timer")).Connect("timeout", this, "queue_free");
 
 		Texture tex;
 		if (difficulty == 0)
@@ -105,10 +106,19 @@ public class Enemy : Node2D
 	{
 		health--;
 		((SpriteTransformer)FindNode("Sprite").FindNode("SpriteTransformer")).spriteFlashing = true;
-		if (health<1)
+		if (health < 1)
 		{
+			((AudioStreamPlayer)GetNode("/root/Scene/Audio/MonsterDead")).PitchScale = (float)GD.RandRange(0.9, 1.1);
+			((AudioStreamPlayer)GetNode("/root/Scene/Audio/MonsterDead")).Play();
 			((Player)GetNode("/root/Scene/Player")).increaseScore(20 + 30 * difficulty);
-			QueueFree();
+			((Timer)FindNode("Timer")).WaitTime = 0.05f;
+			((Timer)FindNode("Timer")).Start();
+
+		}
+		else
+		{
+			((AudioStreamPlayer)GetNode("/root/Scene/Audio/MonsterHurt")).PitchScale = (float)GD.RandRange(0.9, 1.1);
+			((AudioStreamPlayer)GetNode("/root/Scene/Audio/MonsterHurt")).Play();
 		}
 	}
 

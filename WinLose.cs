@@ -12,9 +12,13 @@ public class WinLose : Label
 	{
 		if(Global.win)
 		{
+			((AudioStreamPlayer)GetNode("/root/Node/Audio/Win")).Play();
 			Text = "You Win!";
 		}
-		else { Text = "You Lose!"; }
+		else
+		{
+			((AudioStreamPlayer)GetNode("/root/Node/Audio/Lose")).Play();
+			Text = "You Lose!"; }
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

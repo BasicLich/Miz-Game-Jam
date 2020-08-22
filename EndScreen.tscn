@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Score.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Score.cs" type="Script" id=2]
 [ext_resource path="res://WinLose.cs" type="Script" id=3]
+[ext_resource path="res://lose.wav" type="AudioStream" id=4]
 
 [sub_resource type="Theme" id=1]
 
@@ -47,3 +48,10 @@ grow_horizontal = 2
 grow_vertical = 2
 custom_colors/font_color = Color( 0.811765, 0.776471, 0.721569, 1 )
 script = ExtResource( 3 )
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Win" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="Lose" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 4 )
