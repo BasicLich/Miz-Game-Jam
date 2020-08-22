@@ -43,13 +43,13 @@ public class Spawner : Node2D
                 { chance = 35; }
                 else { chance = 25; }
 
-                if (GD.RandRange(0, 100) < chance)
+                if (GD.RandRange(-0.5, 100.49) < chance)
 				{
 					node.Call("setType", 1);
 				}
                 else { node.Call("setType", 0); }
 
-                if (GD.RandRange(0, 100) < (7f-Global.floorLevel/3f))
+                if (GD.RandRange(-0.5, 100.49) < (7f-Global.floorLevel/3f))
                 {
                     node.Call("setType", 2);
                 }

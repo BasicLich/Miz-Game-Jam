@@ -81,7 +81,7 @@ public class CardAndSpawnManager : Node
 			for (int j = 0; j < monsterNo[i]; j++)
 			{
 				//choose a random unused spawner
-				int randomIndex = (int)Math.Round(GD.RandRange(0, spawners.Count - 1));
+				int randomIndex = (int)Math.Round(GD.RandRange(-0.5, spawners.Count - 1+0.49));
 				if (!((bool)(((Node)spawners[randomIndex]).Get("EnemySpawned"))))
 				{
 
@@ -89,7 +89,7 @@ public class CardAndSpawnManager : Node
 					//give it random cards
 					for (int k = 0; k < i + 2; k++)
 					{
-						int randCardIndex = (int)Math.Round(GD.RandRange(0, deck.Count - 1));
+						int randCardIndex = (int)Math.Round(GD.RandRange(-0.5, deck.Count - 1+0.49));
 						monsterHand.Add(deck[randCardIndex]);
 						deck.RemoveAt(randCardIndex);
 					}

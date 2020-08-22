@@ -7,7 +7,7 @@ public class Coin : Node2D
 	[Export]
 	int coinValue = 10;
 	[Export]
-	int gemValue = 50;
+	int gemValue = 30;
 	[Signal]
 	public delegate void CoinCollected(int value);
     [Signal]

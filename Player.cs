@@ -39,7 +39,7 @@ public class Player : KinematicBody2D
             {
                 Global.floorLevel += 1;
                 Global.score = score;
-                if (Global.floorLevel>5-Global.difficulty*5)
+                if (Global.floorLevel>5)
                 {
                     GD.Print("win");
                     Global.win = true;
