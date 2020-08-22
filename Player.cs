@@ -89,6 +89,7 @@ public class Player : KinematicBody2D
 
 		else if ((x.GetCellv((Position / 16) + velocity) == 1) && velocity != new Vector2(0, 0) && hand.Count > 0)
 		{ GD.Print("ATTACK");
+                HoldCount = 2;
 			EmitSignal(nameof(CardAttack), new Attack(hand[selectedCardIndex], Name, target.Name));
 			
 			
