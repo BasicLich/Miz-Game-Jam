@@ -78,10 +78,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Score.cs" />
+    <Compile Include="Sound.cs" />
     <Compile Include="Spawner.cs" />
     <Compile Include="SpriteTransformer.cs" />
     <Compile Include="ClickableMenu.cs" />
     <Compile Include="TileMap.cs" />
+    <Compile Include="Value%20Edit.cs" />
     <Compile Include="WinLose.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

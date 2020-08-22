@@ -1,8 +1,11 @@
 using Godot;
 using System;
 
-public class WinLose : Label
+public class ValueEdit : Node2D
 {
+	[Export]
+	public int index;
+
 	// Declare member variables here. Examples:
 	// private int a = 2;
 	// private string b = "text";
@@ -10,16 +13,7 @@ public class WinLose : Label
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Global.state = "menu";
-		if (Global.win)
-		{
-			((AudioStreamPlayer)GetNode("/root/Node/Audio/Win")).Play();
-			Text = "You Win!";
-		}
-		else
-		{
-			((AudioStreamPlayer)GetNode("/root/Node/Audio/Lose")).Play();
-			Text = "You Lose!"; }
+		((Label)GetNode("Label")).Text=Name;
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

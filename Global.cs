@@ -7,19 +7,29 @@ using System;
    static public int difficulty=0;
    static public int score = 0;
    static public bool win;
-	static public bool ingame = false;
-	bool prevframeingame;
-
+	static public string state;
+	static public string stateprev;
+	static public float musicVol=0.5f;
+	static public float sfxVol=0.5f;
+	static public string playsoundname;
 	public override void _Process(float delta)
 	{
-		if (ingame && ingame!=prevframeingame)
+		if (state=="game" && state != stateprev)
 		{
-			((AudioStreamPlayer)FindNode("Music")).Play();
+			((AudioStreamPlayer)GetNode("MenuMusic")).Stop();
+			((AudioStreamPlayer)FindNode("GameMusic")).Play();
 		}
-		if (!ingame && ingame != prevframeingame)
+		if (state == "menu" && state != stateprev)
 		{
-			((AudioStreamPlayer)GetNode("Music")).Stop();
+			((AudioStreamPlayer)GetNode("GameMusic")).Stop();
+			((AudioStreamPlayer)GetNode("MenuMusic")).Play();
 		}
-		prevframeingame = ingame;
+		if (playsoundname!=null)
+		{
+			((AudioStreamPlayer)FindNode(playsoundname)).Play();
+		}
+		playsoundname = null;
+		stateprev = state;
 	}
+
 }

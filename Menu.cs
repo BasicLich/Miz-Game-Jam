@@ -4,7 +4,7 @@ using System;
 public class Menu : Node
 {
 	[Export]
-	public int menuSelectionIndex;
+	public int menuSelectionIndex=0;
 	[Export]
 	public int menuSize;
 
@@ -15,9 +15,9 @@ public class Menu : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Global.ingame = false;
+		Global.state = "menu";
 		EmitSignal(nameof(menuSelection), menuSelectionIndex);
-		menuSize = GetChildren().Count-2;
+		menuSize = GetChildren().Count-4;
 	}
 
 public override void _Process(float delta)
@@ -32,24 +32,39 @@ public override void _Process(float delta)
 			{
 				menuSelectionIndex = (menuSelectionIndex + 1) % menuSize;
 			}
+
 			EmitSignal(nameof(menuSelection), menuSelectionIndex);
-			((AudioStreamPlayer)GetNode("/root/Menu/Audio/Select")).Play();
+			((AudioStreamPlayer)GetNode("/root/"+Name+"/Audio/Select")).Play();
 		}
 		else if (Input.IsActionJustPressed("ui_accept"))
 		{
-			switch (menuSelectionIndex)
+			if (Name == "Menu")
 			{
-				case 0:
-					((Timer)FindNode("Timer")).Start();
-					timerTrig = true;
-					((AudioStreamPlayer)GetNode("/root/Menu/Audio/GameStart")).Play();
-					break;
-				case 1:
-					GetTree().ChangeScene("res://Options.tscn");
-					break;
-				case 2:
-					GetTree().Quit();
-					break;
+				switch (menuSelectionIndex)
+				{
+					case 0:
+						((Timer)FindNode("Timer")).Start();
+						timerTrig = true;
+						((AudioStreamPlayer)GetNode("/root/Menu/Audio/GameStart")).Play();
+						break;
+					case 1:
+						Global.playsoundname="Select";
+						GetTree().ChangeScene("res://Options.tscn");
+						break;
+					case 2:
+						GetTree().Quit();
+						break;
+				}
+			}
+			else if (Name == "Options")
+			{
+				switch (menuSelectionIndex)
+				{
+					case 2:
+						 Global.playsoundname="Select";
+						GetTree().ChangeScene("res://Menu.tscn");
+						break;
+			}
 			}
 		}
 

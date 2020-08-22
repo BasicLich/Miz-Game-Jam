@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Menu.cs" type="Script" id=1]
 [ext_resource path="res://BackgroundStyle.tres" type="StyleBox" id=2]
 [ext_resource path="res://Sounds/select.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sounds/gamestart.ogg" type="AudioStream" id=4]
 [ext_resource path="res://ClickableMenu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://menu.wav" type="AudioStream" id=6]
 
 [node name="Menu" type="Node"]
 script = ExtResource( 1 )
@@ -35,10 +34,6 @@ menuIndex = 2
 
 [node name="Select" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 3 )
-
-[node name="Music" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 6 )
-autoplay = true
 
 [node name="GameStart" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 4 )

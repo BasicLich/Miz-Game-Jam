@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Tiles/char.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Score.tscn" type="PackedScene" id=26]
 [ext_resource path="res://music.wav" type="AudioStream" id=27]
 [ext_resource path="res://Particles.tscn" type="PackedScene" id=28]
+[ext_resource path="res://new_dynamicfont.tres" type="DynamicFont" id=29]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -105,6 +106,7 @@ texture = ExtResource( 13 )
 centered = false
 
 [node name="Score" parent="CanvasLayer" instance=ExtResource( 26 )]
+custom_fonts/font = ExtResource( 29 )
 
 [node name="Floor" type="Label" parent="CanvasLayer"]
 anchor_right = 10.0

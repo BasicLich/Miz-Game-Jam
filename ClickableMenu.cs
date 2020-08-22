@@ -9,11 +9,15 @@ public class ClickableMenu: TextureRect
 
 	[Export]
 	int menuIndex;
+	[Export]
+	string name;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+
 		GetParent().Connect("menuSelection", this, "updateSelection");
+
 		((Label)FindNode("Text")).Text = Name;
 	}
 
@@ -28,12 +32,53 @@ public class ClickableMenu: TextureRect
 		if (selection == menuIndex)
 		{
 			Modulate = new Color(1.3f, 1.3f, 1.3f, 1.3f);
+			if(HasNode("HSlider"))
+			{
+				((HSlider)FindNode("HSlider")).GrabFocus();
+			}
 		}
 		else
 		{
 			Modulate = new Color(1f, 1f, 1f, 1f);
 		}
 	}
+	
+	private void _on_ClickableMenu_mouse_entered()
+{
+	if(GetParent().Name=="Options")
+		{
+			Modulate = new Color(1.3f, 1.3f, 1.3f, 1.3f);
+			((AudioStreamPlayer)GetNode("/root/Options/Audio/Select")).Play();
+		}
 }
+
+
+private void _on_ClickableMenu_mouse_exited()
+{
+		if (GetParent().Name == "Options")
+		{
+			Modulate = new Color(1f, 1f, 1f, 1f);
+		}
+	}
+
+	private void _on_HSlider_value_changed(float value)
+	{
+		Global.playsoundname = "Select";
+		if (name=="music")
+		{
+			Global.musicVol= value;
+		}
+		else
+		{
+			Global.sfxVol = value ;
+		}
+	}
+	
+}
+
+
+
+
+
 
 

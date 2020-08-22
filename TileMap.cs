@@ -16,7 +16,7 @@ public class TileMap : Godot.TileMap
 	public override void _Ready()
 	{
 		int floorLevel = Global.floorLevel;
-        Global.ingame = true;
+        Global.state = "game";
 
 
 
