@@ -10,6 +10,7 @@ public class WinLose : Label
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		((TextureRect)GetParent().FindNode("Continue")).Modulate = new Color(1.3f, 1.3f, 1.3f, 1.3f);
 		Global.state = "menu";
 		if (Global.win)
 		{
@@ -22,9 +23,13 @@ public class WinLose : Label
 			Text = "You Lose!"; }
 	}
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+  // Called every frame. 'delta' is the elapsed time since the previous frame.
+  public override void _Process(float delta)
+  {
+		if (Input.IsActionJustPressed("ui_accept"))
+		{
+			Global.playsoundname = "Select";
+			GetTree().ChangeScene("res://Menu.tscn");
+		}
+  }
 }
