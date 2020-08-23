@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Tiles/char.png" type="Texture" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://new_dynamicfont.tres" type="DynamicFont" id=29]
 [ext_resource path="res://Sound.cs" type="Script" id=30]
 [ext_resource path="res://Sounds/select.wav" type="AudioStream" id=31]
+[ext_resource path="res://Shader.tscn" type="PackedScene" id=32]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -165,6 +166,8 @@ script = ExtResource( 15 )
 
 [node name="SpriteTransformer" parent="CanvasLayer/5" instance=ExtResource( 17 )]
 
+[node name="Shader2" parent="CanvasLayer" instance=ExtResource( 32 )]
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 4 )
 cell_size = Vector2( 16, 16 )
@@ -215,6 +218,8 @@ emitting = false
 
 [node name="AttackManager" type="Node2D" parent="."]
 script = ExtResource( 11 )
+
+[node name="Shader" parent="." instance=ExtResource( 32 )]
 
 [node name="Audio" type="Node" parent="."]
 

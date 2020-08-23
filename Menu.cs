@@ -11,13 +11,15 @@ public class Menu : Node
 	bool timerTrig = false;
 	[Signal]
 	public delegate void menuSelection(int selection);
-
+	[Signal]
+	public delegate void paletteUpdate();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Connect("paletteUpdate", GetNode("Shader"), "update");
 		Global.state = "menu";
 		EmitSignal(nameof(menuSelection), menuSelectionIndex);
-		menuSize = GetChildren().Count-5;
+		menuSize = GetChildren().Count-7;
 	}
 
 public override void _Process(float delta)
@@ -52,6 +54,7 @@ public override void _Process(float delta)
 					case 0:
 						((Timer)FindNode("Timer")).Start();
 						timerTrig = true;
+						Global.score = 0;
 						((AudioStreamPlayer)GetNode("/root/Menu/Audio/GameStart")).Play();
 						break;
 					case 1:
@@ -75,23 +78,44 @@ public override void _Process(float delta)
 						Global.playsoundname = "Select";
 						OS.WindowFullscreen = !OS.WindowFullscreen;
 						break;
+					case 3:
+						Global.playsoundname = "Select";
+						GetTree().ChangeScene("res://Palette.tscn");
+						break;
 					case 4:
 						 Global.playsoundname="Select";
 						GetTree().ChangeScene("res://Menu.tscn");
 						break;
 			}
 			}
+			else if (Name == "Palette")
+			{
+				if (menuSelectionIndex != 5)
+				{
+					if (menuSelectionIndex ==0|| Global.paletteUnlocked[menuSelectionIndex-1] )
+					{
+						Global.playsoundname = "Select";
+						Global.palette = menuSelectionIndex / 4.0f;
+						EmitSignal(nameof(paletteUpdate));
+					}
+				}
+				else
+				{
+					Global.playsoundname = "Select";
+					GetTree().ChangeScene("res://Menu.tscn");
+					
+				}
+			}
 		}
 
 		if (timerTrig)
 		{
-			((Panel)GetNode("Cover")).Modulate = new Color(1, 1, 1, 1.5f - ((Timer)FindNode("Timer")).TimeLeft);
+			((Panel)GetNode("Cover")).Modulate = new Color(1, 1, 1, 1.1f);
 		}
 		
 
 	}
 
-	
 
 	private void _on_Timer_timeout()
 	{

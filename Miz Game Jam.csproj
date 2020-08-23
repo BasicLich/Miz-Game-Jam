@@ -71,18 +71,23 @@
     <Compile Include="EnemyManager.cs" />
     <Compile Include="Floor.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="Highscore.cs" />
     <Compile Include="LifeSprite.cs" />
+    <Compile Include="Loading.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MotionModule.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Score.cs" />
+    <Compile Include="Shader.cs" />
     <Compile Include="Sound.cs" />
     <Compile Include="Spawner.cs" />
     <Compile Include="SpriteTransformer.cs" />
     <Compile Include="SelectableMenuItem.cs" />
     <Compile Include="TileMap.cs" />
+    <Compile Include="Unlocks.cs" />
+    <Compile Include="UnlockText.cs" />
     <Compile Include="Value%20Edit.cs" />
     <Compile Include="WinLose.cs" />
   </ItemGroup>
