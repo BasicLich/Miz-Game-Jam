@@ -26,13 +26,11 @@ __meta__ = {
 
 [node name="Text" parent="." instance=ExtResource( 3 )]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.52
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -91.5613
-margin_top = -13.7551
-margin_right = 90.4387
-margin_bottom = 18.2449
+anchor_bottom = 0.55
+margin_left = 0.0
+margin_top = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = SubResource( 1 )
