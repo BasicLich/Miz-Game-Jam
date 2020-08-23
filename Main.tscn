@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Tiles/char.png" type="Texture" id=2]
@@ -29,6 +29,8 @@
 [ext_resource path="res://music.wav" type="AudioStream" id=27]
 [ext_resource path="res://Particles.tscn" type="PackedScene" id=28]
 [ext_resource path="res://new_dynamicfont.tres" type="DynamicFont" id=29]
+[ext_resource path="res://Sound.cs" type="Script" id=30]
+[ext_resource path="res://Sounds/select.wav" type="AudioStream" id=31]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -218,27 +220,51 @@ script = ExtResource( 11 )
 
 [node name="FindCoin" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 21 )
+script = ExtResource( 30 )
+type = "sfx"
+
+[node name="Select" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 31 )
+script = ExtResource( 30 )
+type = "sfx"
+volumeScale = 0.5
 
 [node name="FindGem" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 18 )
+script = ExtResource( 30 )
+type = "sfx"
 
 [node name="FindHeart" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 19 )
+script = ExtResource( 30 )
+type = "sfx"
 
 [node name="MonsterHurt" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 20 )
+script = ExtResource( 30 )
+type = "sfx"
 
 [node name="SelfHurt" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 22 )
+script = ExtResource( 30 )
+type = "sfx"
 
 [node name="Walk" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 23 )
+script = ExtResource( 30 )
+type = "sfx"
 
 [node name="Draw" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 24 )
+script = ExtResource( 30 )
+type = "sfx"
 
 [node name="Floor1" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 27 )
+script = ExtResource( 30 )
+type = "sfx"
 
 [node name="MonsterDead" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 25 )
+script = ExtResource( 30 )
+type = "sfx"

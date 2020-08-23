@@ -1,0 +1,16 @@
+Music:
+
+Together We Are Stronger - Komiku - Used Under CC0
+Misty Bog - Eric Matyas - www.soundimage.com
+
+Sound Effects:
+
+8 Bit Sound Pack - Sounds By Dane - https://soundsbydane.itch.io/8-bit-sound-pack
+NES Samples- Contralogic - http://www.contralogic.com/256-nes-samples/
+Game Start - Plasterbrain - Used Under CC0 - https://freesound.org/people/plasterbrain/
+Additional Sounds Created By Hacktic (me) Using GMXR - https://wubs.itch.io/gmxr - Feel free to use this under the MIT License
+
+Code:
+A Star Sharp - davecusatis - https://github.com/davecusatis/A-Star-Sharp/
+All other code by Hacktic (me) - Feel free to use this under the MIT License
+

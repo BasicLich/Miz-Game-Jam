@@ -4,7 +4,7 @@
 [ext_resource path="res://Global.cs" type="Script" id=2]
 [ext_resource path="res://menu.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sound.cs" type="Script" id=4]
-[ext_resource path="res://Sounds/select2.wav" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/Find_Money.wav" type="AudioStream" id=5]
 
 [node name="Node" type="Node"]
 script = ExtResource( 2 )

@@ -42,25 +42,6 @@ public class ClickableMenu: TextureRect
 			Modulate = new Color(1f, 1f, 1f, 1f);
 		}
 	}
-	
-	private void _on_ClickableMenu_mouse_entered()
-{
-	if(GetParent().Name=="Options")
-		{
-			Modulate = new Color(1.3f, 1.3f, 1.3f, 1.3f);
-			((AudioStreamPlayer)GetNode("/root/Options/Audio/Select")).Play();
-		}
-}
-
-
-private void _on_ClickableMenu_mouse_exited()
-{
-		if (GetParent().Name == "Options")
-		{
-			Modulate = new Color(1f, 1f, 1f, 1f);
-		}
-	}
-
 	private void _on_HSlider_value_changed(float value)
 	{
 		Global.playsoundname = "Select";

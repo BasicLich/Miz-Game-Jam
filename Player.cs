@@ -72,17 +72,21 @@ public class Player : KinematicBody2D
 
 		if ((x.GetCellv((Position / 16) + velocity) == 1 && target==null && velocity!=new Vector2(0,0)))
 		{
-            //Play sound
-            if(((AudioStreamPlayer)GetNode("/root/Scene/Audio/Walk")).PitchScale>=1)
+            if (!((MotionModule)FindNode("Motion")).motionFlag)
                 {
-                    ((AudioStreamPlayer)GetNode("/root/Scene/Audio/Walk")).PitchScale = 0.9f;
+                    //Play sound
+                    if (((AudioStreamPlayer)GetNode("/root/Scene/Audio/Walk")).PitchScale >= 1)
+                    {
+                        ((AudioStreamPlayer)GetNode("/root/Scene/Audio/Walk")).PitchScale = 0.9f;
+                    }
+                    else
+                    { ((AudioStreamPlayer)GetNode("/root/Scene/Audio/Walk")).PitchScale = 1.1f; }
+
+                    ((AudioStreamPlayer)GetNode("/root/Scene/Audio/Walk")).Play();
                 }
-            else
-                { ((AudioStreamPlayer)GetNode("/root/Scene/Audio/Walk")).PitchScale = 1.1f; }
 
-            ((AudioStreamPlayer)GetNode("/root/Scene/Audio/Walk")).Play();
 
-            EmitSignal(nameof(PlayerMotion), Position/16+velocity);
+                EmitSignal(nameof(PlayerMotion), Position/16+velocity);
 			MoveTimeout = 0;
 			((MotionModule)FindNode("Motion")).motionFlag = true;
 		}
@@ -230,6 +234,11 @@ public class Player : KinematicBody2D
 			setSelectorPos();
 
 		}
+
+        if (Input.IsActionJustReleased("card") && hand.Count>0)
+        {
+            ((AudioStreamPlayer)GetNode("/root/Scene/Audio/Select")).Play();
+        }
 
 		if (Input.IsActionPressed("right") || Input.IsActionPressed("left")|| Input.IsActionPressed("up")|| Input.IsActionPressed("down"))
 		{

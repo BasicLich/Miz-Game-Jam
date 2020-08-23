@@ -5,7 +5,7 @@
 [ext_resource path="res://Score.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tiles/menubackdrop.png" type="Texture" id=4]
 [ext_resource path="res://Sound.cs" type="Script" id=5]
-[ext_resource path="res://Sounds/select2.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/Find_Money.wav" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -42,5 +42,3 @@ text = "Start Game fgdfgfd"
 stream = ExtResource( 6 )
 script = ExtResource( 5 )
 type = "sfx"
-[connection signal="mouse_entered" from="." to="." method="_on_ClickableMenu_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_ClickableMenu_mouse_exited"]
