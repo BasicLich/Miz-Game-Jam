@@ -20,11 +20,15 @@ public class Menu : Node
 		Global.state = "menu";
 		EmitSignal(nameof(menuSelection), menuSelectionIndex);
 		menuSize = GetChildren().Count-7;
+		if (Name=="Tutorial")
+		{
+			((TextureRect)FindNode("Back To Menu")).Modulate = new Color(1.3f, 1.3f, 1.3f, 1.3f);
+		}
 	}
 
 public override void _Process(float delta)
  {
-		if (Input.IsActionJustPressed("ui_up") || Input.IsActionJustPressed("ui_down"))
+		if ((Input.IsActionJustPressed("ui_up") || Input.IsActionJustPressed("ui_down")) && Name!="Tutorial")
 		{
 			if (Input.IsActionJustPressed("ui_up"))
 			{
@@ -105,6 +109,11 @@ public override void _Process(float delta)
 					GetTree().ChangeScene("res://Menu.tscn");
 					
 				}
+			}
+			else if (Name=="Tutorial")
+			{
+				Global.playsoundname = "Select";
+				GetTree().ChangeScene("res://Menu.tscn");
 			}
 		}
 

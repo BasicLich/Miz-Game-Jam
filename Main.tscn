@@ -28,23 +28,27 @@
 [ext_resource path="res://Score.tscn" type="PackedScene" id=26]
 [ext_resource path="res://music.wav" type="AudioStream" id=27]
 [ext_resource path="res://Particles.tscn" type="PackedScene" id=28]
-[ext_resource path="res://new_dynamicfont.tres" type="DynamicFont" id=29]
 [ext_resource path="res://Sound.cs" type="Script" id=30]
 [ext_resource path="res://Sounds/select.wav" type="AudioStream" id=31]
 [ext_resource path="res://Shader.tscn" type="PackedScene" id=32]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
+outline_color = Color( 0.811765, 0.776471, 0.721569, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="NavigationPolygon" id=3]
+[sub_resource type="NavigationPolygon" id=4]
 vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
-[sub_resource type="TileSet" id=4]
+[sub_resource type="TileSet" id=5]
 0/name = "wall"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -64,14 +68,14 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 2 )
+0/shape = SubResource( 3 )
 0/shape_one_way = false
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 1, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -85,7 +89,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/autotile/tile_size = Vector2( 16, 16 )
 1/autotile/spacing = 0
 1/autotile/occluder_map = [  ]
-1/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 3 ) ]
+1/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 4 ) ]
 1/autotile/priority_map = [ Vector3( 1, 0, 9 ) ]
 1/autotile/z_index_map = [  ]
 1/occluder_offset = Vector2( 0, 0 )
@@ -109,14 +113,14 @@ texture = ExtResource( 13 )
 centered = false
 
 [node name="Score" parent="CanvasLayer" instance=ExtResource( 26 )]
-custom_fonts/font = ExtResource( 29 )
+custom_fonts/font = SubResource( 1 )
 
 [node name="Floor" type="Label" parent="CanvasLayer"]
 anchor_right = 10.0
 anchor_bottom = 10.0
 margin_left = 36.0
 margin_top = 70.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.811765, 0.776471, 0.721569, 1 )
 text = "Health: 5"
 script = ExtResource( 12 )
@@ -169,7 +173,7 @@ script = ExtResource( 15 )
 [node name="Shader2" parent="CanvasLayer" instance=ExtResource( 32 )]
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 4 )
+tile_set = SubResource( 5 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 3603445, 0, 65537 )
@@ -214,7 +218,9 @@ texture = ExtResource( 10 )
 centered = false
 
 [node name="Particles" parent="Player" instance=ExtResource( 28 )]
+position = Vector2( 8, 8 )
 emitting = false
+script = null
 
 [node name="AttackManager" type="Node2D" parent="."]
 script = ExtResource( 11 )

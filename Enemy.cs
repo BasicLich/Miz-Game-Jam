@@ -106,7 +106,15 @@ public class Enemy : Node2D
 	{
 		health--;
 		((SpriteTransformer)FindNode("Sprite").FindNode("SpriteTransformer")).spriteFlashing = true;
+
+		var scene = GD.Load<PackedScene>("res://Particles.tscn");
+		var node = scene.Instance();
+		((Node2D)node).Position = Position+new Vector2(8,8);
+		GetParent().GetParent().AddChild(node);
+		GetParent().GetParent().MoveChild(node, 3);
+
 		if (health < 1)
+
 		{
 			((AudioStreamPlayer)GetNode("/root/Scene/Audio/MonsterDead")).PitchScale = (float)GD.RandRange(0.9, 1.1);
 			((AudioStreamPlayer)GetNode("/root/Scene/Audio/MonsterDead")).Play();

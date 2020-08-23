@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Sound.cs" type="Script" id=1]
+[ext_resource path="res://SelectableMenuItem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://new_dynamicfont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Shader.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Tiles/enemy1.png" type="Texture" id=5]
+[ext_resource path="res://Menu.cs" type="Script" id=6]
+[ext_resource path="res://BackgroundStyle.tres" type="StyleBox" id=7]
+[ext_resource path="res://Sounds/select.wav" type="AudioStream" id=8]
+[ext_resource path="res://Tiles/enemy2.png" type="Texture" id=9]
+[ext_resource path="res://Tiles/enemy0.png" type="Texture" id=10]
+
+[node name="Tutorial" type="Node"]
+script = ExtResource( 6 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 40000.0
+margin_bottom = 40000.0
+custom_styles/panel = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.01
+anchor_right = 0.5
+anchor_bottom = 0.85
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.811765, 0.776471, 0.721569, 1 )
+text = "Explore 5 Floors, Play Cards With Monsters & Collect Treasure
+
+The top right box shows your hand of cards, and the box below this shows
+the 8 most recently played cards. All cards and health are reset each floor.
+
+When you move towards a spot occupied by a monster, you and the monster
+play your currently selected card. Whoevers card has the highest value 
+damages the other. If your cards are of the same value, neither takes damage.
+
+If a monster runs out of cards, it will be unable to attack. However, if you run
+out of cards, neither can you!
+
+Be careful, some monsters are stronger than others.
+
+For tactical play, remember that monsters always use their highest value
+cards first, and that there is only one of each card per floor.
+
+Go for highscore to unlock alternate palettes!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" type="Control" parent="Label"]
+anchor_left = 0.851
+anchor_top = 0.583
+anchor_right = 0.921
+anchor_bottom = 0.663
+grow_horizontal = 2
+grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Label/Node2D"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="Sprite2" type="Sprite" parent="Label/Node2D"]
+position = Vector2( 80, 0 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Sprite3" type="Sprite" parent="Label/Node2D"]
+position = Vector2( 160, 0 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="Back To Menu" parent="." instance=ExtResource( 2 )]
+anchor_top = 0.93
+anchor_bottom = 0.93
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Select" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 8 )
+script = ExtResource( 1 )
+type = "sfx"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="Cover" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -380.265
+margin_top = -20.4278
+margin_right = 39619.7
+margin_bottom = 39979.6
+mouse_filter = 2
+custom_styles/panel = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shader" parent="." instance=ExtResource( 4 )]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

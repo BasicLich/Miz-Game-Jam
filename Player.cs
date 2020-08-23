@@ -39,6 +39,7 @@ public class Player : KinematicBody2D
             {
                 Global.floorLevel += 1;
                 Global.score = score;
+                
                 if (Global.floorLevel > 4)
                 {
                     GD.Print("win");
@@ -47,6 +48,7 @@ public class Player : KinematicBody2D
                 }
                 else
                 {
+                    Global.playsoundname = "Ladder";
                     GetTree().ReloadCurrentScene();
                 }
              }
@@ -276,6 +278,14 @@ public class Player : KinematicBody2D
 	public void takeDamage(int amount)
 	{
 		health -= amount;
+
+        //blood particles
+        var scene = GD.Load<PackedScene>("res://Particles.tscn");
+        var node = scene.Instance();
+        ((Node2D)node).Position = Position + new Vector2(8, 8);
+        GetParent().GetParent().AddChild(node);
+        GetParent().GetParent().MoveChild(node, 3);
+
         ((SpriteTransformer)FindNode("Sprite").FindNode("SpriteTransformer")).spriteFlashing = true;
         ((AudioStreamPlayer)GetNode("/root/Scene/Audio/SelfHurt")).PitchScale = (float)GD.RandRange(0.9, 1.1);
         ((AudioStreamPlayer)GetNode("/root/Scene/Audio/SelfHurt")).Play();

@@ -2,11 +2,13 @@
 
 importer="wav"
 type="AudioStreamSample"
-valid=false
+path="res://.import/Stairs.wav-910e46103d2993a39298e9e5a4e61c25.sample"
 
 [deps]
 
-source_file="res://select.wav"
+source_file="res://Sounds/Stairs.wav"
+dest_files=[ "res://.import/Stairs.wav-910e46103d2993a39298e9e5a4e61c25.sample" ]
+
 [params]
 
 force/8_bit=false

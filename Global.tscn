@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://music.wav" type="AudioStream" id=1]
 [ext_resource path="res://Global.cs" type="Script" id=2]
 [ext_resource path="res://menu.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sound.cs" type="Script" id=4]
 [ext_resource path="res://Sounds/Find_Money.wav" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/ladder.wav" type="AudioStream" id=6]
 
 [node name="Node" type="Node"]
 script = ExtResource( 2 )
@@ -21,5 +22,10 @@ type = "music"
 
 [node name="Select" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+script = ExtResource( 4 )
+type = "sfx"
+
+[node name="Ladder" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 script = ExtResource( 4 )
 type = "sfx"

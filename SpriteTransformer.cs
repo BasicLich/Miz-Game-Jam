@@ -21,10 +21,6 @@ public class SpriteTransformer : Node
 			//((Sprite)GetParent()).Offset /= ((Sprite)GetParent()).Scale / scale;
 			((Sprite)GetParent()).Modulate = new Color(10, 10, 10, 10);
 
-			if (GetParent().GetParent().HasNode("Particles"))
-			{
-				((Particles2D)GetParent().GetParent().FindNode("Particles")).Emitting = true;
-			}
 		}
 		spriteFlashPercent += delta / spriteFlashTime;
 
@@ -32,10 +28,6 @@ public class SpriteTransformer : Node
 		{
 			//((Sprite)GetParent()).Offset *= ((Sprite)GetParent()).Scale / scale;
 			//((Sprite)GetParent()).Scale /= spriteFlashScale;
-			if (GetParent().GetParent().HasNode("Particles"))
-			{
-				((Particles2D)GetParent().GetParent().FindNode("Particles")).Emitting = false;
-			}
 			spriteFlashPercent = 0;
 			spriteFlashing = false;
 			((Sprite)GetParent()).Modulate = new Color(1, 1, 1, 1);

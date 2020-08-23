@@ -14,12 +14,12 @@ public class WinLose : Label
 		
 		saveGame.Open("user://savegame.save", File.ModeFlags.ReadWrite);
 		string unlockString = "";
-
+		Global.floorLevel = 0;
 		//Check for unlocks
 		if (Global.win && !Global.paletteUnlocked[0])
 		{
 			saveGame.Store8(1);
-			unlockString += "Bloody Nose Palette Unlocked! Palettes Can Be Swapped In Options Menu\n\n";
+			unlockString += "Autumn Memories Palette Unlocked! Palettes Can Be Swapped In Options Menu\n\n";
 			Global.paletteUnlocked[0] = true;
 		}
 		else
@@ -29,7 +29,7 @@ public class WinLose : Label
 		}
 		if (Global.score>=1500 && !Global.paletteUnlocked[1])
 		{
-			unlockString += "Autumn Memory Palette Unlocked!\n\n";
+			unlockString += "Muted Thoughts Palette Unlocked!\n\n";
 			saveGame.Store8(1);
 			Global.paletteUnlocked[1] = true;
 		}
@@ -39,7 +39,7 @@ public class WinLose : Label
 		}
 		if (Global.score >= 2000 && !Global.paletteUnlocked[2])
 		{
-			unlockString += "Muted Emotion Palette Unlocked!\n\n";
+			unlockString += "Blooded Nose Palette Unlocked!\n\n";
 			saveGame.Store8(1);
 			Global.paletteUnlocked[2] = true;
 		}

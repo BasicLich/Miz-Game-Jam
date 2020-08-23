@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
  public class Global : Node
 {
+
    static public int floorLevel=0;
    static public int difficulty=0;
    static public int score = 0;
@@ -50,7 +51,7 @@ using System.Collections.Generic;
 			
 		}
 		GD.Print(saveGame.GetPosition());
-        highScore = (int)saveGame.Get32();
+		highScore = (int)saveGame.Get32();
 	}
 
 	public override void _Process(float delta)

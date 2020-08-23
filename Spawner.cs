@@ -29,32 +29,32 @@ public class Spawner : Node2D
 	{
 		if(!EnemySpawned)
 		{
-            int chance;
-            if (treasureRoomSpawner)
-            { chance = 60; }
-            else { chance = 45; }
+			int chance;
+			if (treasureRoomSpawner)
+			{ chance = 60; }
+			else { chance = 45; }
 			if((int)Math.Round(GD.RandRange(-0.5, 100.49))<chance)
 			{
 				var scene = GD.Load<PackedScene>("res://Coin.tscn");
 				var node = scene.Instance();
 				((Node2D)node).Position = Position;
 
-                if (treasureRoomSpawner)
-                { chance = 35; }
-                else { chance = 25; }
+				if (treasureRoomSpawner)
+				{ chance = 35; }
+				else { chance = 25; }
 
-                if (GD.RandRange(-0.5, 100.49) < chance)
+				if (GD.RandRange(-0.5, 100.49) < chance)
 				{
 					node.Call("setType", 1);
 				}
-                else { node.Call("setType", 0); }
+				else { node.Call("setType", 0); }
 
-                if (GD.RandRange(-0.5, 100.49) < (7f-Global.floorLevel/3f))
-                {
-                    node.Call("setType", 2);
-                }
+				if (GD.RandRange(-0.5, 100.49) < (7f-Global.floorLevel/3f))
+				{
+					node.Call("setType", 2);
+				}
 
-                
+				
 				GetParent().GetParent().FindNode("Player").Connect("PlayerMotion", node, "checkForCollection");
 				GetParent().GetParent().FindNode("Coins").AddChild(node);
 			}

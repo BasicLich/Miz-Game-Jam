@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Score.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Score.cs" type="Script" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://BackgroundStyle.tres" type="StyleBox" id=5]
 [ext_resource path="res://SelectableMenuItem.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Unlocks.cs" type="Script" id=7]
+[ext_resource path="res://Sound.cs" type="Script" id=8]
+[ext_resource path="res://Sounds/gamestart.ogg" type="AudioStream" id=9]
+[ext_resource path="res://new_dynamicfont32.tres" type="DynamicFont" id=10]
+[ext_resource path="res://Shader.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Theme" id=1]
 
@@ -33,6 +37,7 @@ anchor_bottom = 0.15
 margin_left = 0.0
 margin_top = 0.0
 grow_horizontal = 2
+custom_fonts/font = ExtResource( 10 )
 script = ExtResource( 3 )
 
 [node name="Score" parent="CanvasLayer" instance=ExtResource( 1 )]
@@ -45,6 +50,7 @@ margin_top = 0.0
 margin_right = 64.0
 margin_bottom = 32.0
 grow_horizontal = 2
+custom_fonts/font = ExtResource( 10 )
 script = ExtResource( 2 )
 
 [node name="UnlockText" parent="CanvasLayer" instance=ExtResource( 1 )]
@@ -55,6 +61,7 @@ anchor_bottom = 0.35
 margin_left = 0.0
 margin_top = 0.0
 grow_horizontal = 2
+custom_fonts/font = ExtResource( 10 )
 text = "1
 
 2
@@ -71,9 +78,16 @@ script = ExtResource( 7 )
 anchor_top = 0.88
 anchor_bottom = 0.89
 
+[node name="Shader" parent="." instance=ExtResource( 11 )]
+
 [node name="Audio" type="Node" parent="."]
 
 [node name="Win" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 9 )
+script = ExtResource( 8 )
+type = "sfx"
 
 [node name="Lose" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 4 )
+script = ExtResource( 8 )
+type = "sfx"
