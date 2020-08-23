@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://ClickableMenu.cs" type="Script" id=2]
+[ext_resource path="res://SelectableMenuItem.cs" type="Script" id=2]
 [ext_resource path="res://Score.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tiles/menubackdrop.png" type="Texture" id=4]
 [ext_resource path="res://Sound.cs" type="Script" id=5]

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class ClickableMenu: TextureRect
+public class SelectableMenuItem : TextureRect
 {
 	// Declare member variables here. Examples:
 	// private int a = 2;
