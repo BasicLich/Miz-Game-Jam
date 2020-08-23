@@ -42,7 +42,7 @@ public class Player : KinematicBody2D
                 
                 if (Global.floorLevel > 4)
                 {
-                    GD.Print("win");
+                    //GD.Print("win");
                     Global.win = true;
                     GetTree().ChangeScene("res://EndScreen.tscn");
                 }
@@ -94,7 +94,7 @@ public class Player : KinematicBody2D
 		}
 
 		else if ((x.GetCellv((Position / 16) + velocity) == 1) && velocity != new Vector2(0, 0) && hand.Count > 0)
-		{ GD.Print("ATTACK");
+		{ //GD.Print("ATTACK");
                 HoldCount = 2;
 			EmitSignal(nameof(CardAttack), new Attack(hand[selectedCardIndex], Name, target.Name));
 			
@@ -162,10 +162,10 @@ public class Player : KinematicBody2D
 			foreach (Card i in hand)
 			{
 				i.Print();
-				GD.Print(count);
+				//GD.Print(count);
 				count += 1;
 			}
-			GD.Print("");
+			//GD.Print("");
 		}
 		if(Input.IsKeyPressed(16777217))
 		{

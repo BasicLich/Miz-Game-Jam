@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Tiles/char.png" type="Texture" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://Sounds/enemy_Death.wav" type="AudioStream" id=25]
 [ext_resource path="res://Score.tscn" type="PackedScene" id=26]
 [ext_resource path="res://music.wav" type="AudioStream" id=27]
-[ext_resource path="res://Particles.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Sound.cs" type="Script" id=30]
 [ext_resource path="res://Sounds/select.wav" type="AudioStream" id=31]
 [ext_resource path="res://Shader.tscn" type="PackedScene" id=32]
@@ -216,11 +215,6 @@ script = ExtResource( 9 )
 [node name="Sprite" type="Sprite" parent="Player/Selector"]
 texture = ExtResource( 10 )
 centered = false
-
-[node name="Particles" parent="Player" instance=ExtResource( 28 )]
-position = Vector2( 8, 8 )
-emitting = false
-script = null
 
 [node name="AttackManager" type="Node2D" parent="."]
 script = ExtResource( 11 )

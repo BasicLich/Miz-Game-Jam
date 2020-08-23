@@ -21,16 +21,16 @@ public class EnemyManager : Node
 
 			if ((playerCurrentPos != playerNextPos) && playerNextPos * 16 == i.Position+(i.velocity*16))
 			{
-				GD.Print(i.Position);
-				GD.Print(i.velocity * 16);
+				//GD.Print(i.Position);
+				//GD.Print(i.velocity * 16);
 				i.velocity = new Vector2(0, 0);
 				goto nested_break;
 			}
 			//Check to see if player is attacking, if so attack player
 			else if ((playerCurrentPos == playerNextPos) &&playerCurrentPos*16==i.Position+(i.velocity*16))
 			{
-				GD.Print(i.Name + " ATTACK");
-				GD.Print(i.velocity * 16);
+				//GD.Print(i.Name + " ATTACK");
+				//GD.Print(i.velocity * 16);
 				EmitSignal(nameof(CardAttack), new Attack(((Enemy)i).hand[0], i.Name, "Player"));
 				i.velocity = new Vector2(0, 0);
 				((Enemy)i).hand.RemoveAt(0); 

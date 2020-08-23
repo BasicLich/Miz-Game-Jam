@@ -27,7 +27,7 @@ public class CardDraw : Node2D
 
 		DrawTexture(usedback, baseLoc()+new Vector2(0,16*6));
 		DrawTexture(back, baseLoc());
-		GD.Print("Draw2" + baseLoc());
+		//GD.Print("Draw2" + baseLoc());
 		//draw player hand
 		foreach (Card i in playerHand)
 		{

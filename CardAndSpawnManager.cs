@@ -65,7 +65,7 @@ public class CardAndSpawnManager : Node
 				var scene = GD.Load<PackedScene>("res://ExitDoor.tscn");
 				var node = scene.Instance();
 				((Node2D)node).Position = chosenSpawner.Position;
-				GD.Print(chosenSpawner.Position);
+				//GD.Print(chosenSpawner.Position);
 				chosenSpawner.EnemySpawned = true;
 				GetParent().AddChild(node);
 				break;
@@ -102,7 +102,7 @@ public class CardAndSpawnManager : Node
 					{
 						k.Print();
 					}
-					GD.Print("");
+					//GD.Print("");
 
 					((Node)spawners[randomIndex]).Call("spawnEnemy", i, monsterHand);
 					continue;

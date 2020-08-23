@@ -22,7 +22,7 @@ public class AttackManager : Node2D
 
 	void storeAttack(Attack attack)
 	{
-		GD.Print(attack);
+		//GD.Print(attack);
 		attacks.Add(attack);
 	}
 

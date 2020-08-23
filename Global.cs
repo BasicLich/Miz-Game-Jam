@@ -50,7 +50,7 @@ using System.Collections.Generic;
 
 			
 		}
-		GD.Print(saveGame.GetPosition());
+		//GD.Print(saveGame.GetPosition());
 		highScore = (int)saveGame.Get32();
 	}
 

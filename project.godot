@@ -15,10 +15,11 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Miz Game Jam"
+config/name="WhistAway"
 run/main_scene="res://Menu.tscn"
 boot_splash/image="res://splash2.png"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
@@ -28,6 +29,10 @@ Global="*res://Global.tscn"
 
 window/size/width=1280
 window/size/height=720
+
+[editor]
+
+script_templates_search_path="res://"
 
 [importer_defaults]
 

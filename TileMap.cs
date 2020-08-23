@@ -7,7 +7,7 @@ public class TileMap : Godot.TileMap
 	[Export]
 	int mapSize = 5;
 
-    
+	
 	public List<List<AStarSharp.Node>> tileArray = new List<List<AStarSharp.Node>>(200);
 
 	public AStarSharp.Astar pathfindAstar;
@@ -16,7 +16,7 @@ public class TileMap : Godot.TileMap
 	public override void _Ready()
 	{
 		int floorLevel = Global.floorLevel;
-        Global.state = "game";
+		Global.state = "game";
 
 
 
@@ -49,9 +49,9 @@ public class TileMap : Godot.TileMap
 
 		for (int i = 0; i < walkerArray.Length; i++) { walkerArray[i] = new Walker(); }
 
-		for(int i=0;i<30;i++)
-		{ GD.Print(i+" chance=" +
-			((50f / 900f) * i * i - (3000f / 900f) * i + 50)); }
+		//for(int i=0;i<30;i++)
+		//{ GD.Print(i+" chance=" +
+		//	((50f / 900f) * i * i - (3000f / 900f) * i + 50)); }
 
 		float chance = ((50f / 900f) * floorLevel * floorLevel - (3000f / 900f) * floorLevel + 50);
 
@@ -585,7 +585,7 @@ public class Walker
 		if (lifeLength > minimumLife)
 		{
 			double rand = GD.RandRange(-0.5, 100.49);
-			GD.Print("chance:" + (chance + ((lifeLength - minimumLife-1) * Math.Max(0, 30 - floorLevel*2.6f))));
+			//GD.Print("chance:" + (chance + ((lifeLength - minimumLife-1) * Math.Max(0, 30 - floorLevel*2.6f))));
 			if (rand < (chance + ((lifeLength - minimumLife - 1) * Math.Max(0, 30 - (floorLevel * 2)))))
 			{
 				//GD.Print("kill location:" + x + " " + y);

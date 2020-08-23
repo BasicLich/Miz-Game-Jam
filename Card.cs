@@ -17,7 +17,7 @@ public class Card : Node
 
     public void Print()
     {
-        GD.Print("Suit: " + suit + " Rank: " + rank+ " Value:"+ value);
+        //GD.Print("Suit: " + suit + " Rank: " + rank+ " Value:"+ value);
     }
 
     public int value;

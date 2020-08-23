@@ -78,7 +78,7 @@ script = ExtResource( 7 )
 anchor_top = 0.88
 anchor_bottom = 0.89
 
-[node name="Shader" parent="." instance=ExtResource( 11 )]
+[node name="Shader" parent="CanvasLayer" instance=ExtResource( 11 )]
 
 [node name="Audio" type="Node" parent="."]
 
