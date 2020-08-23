@@ -5,8 +5,6 @@
 [ext_resource path="res://new_styleboxflat.tres" type="StyleBox" id=3]
 [ext_resource path="res://Tiles/spawner.png" type="Texture" id=4]
 
-
-
 [sub_resource type="Theme" id=1]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -439,24 +437,25 @@ __meta__ = {
 }
 
 [node name="Text" type="Label" parent="."]
-margin_left = -176.673
-margin_top = 6.45415
-margin_right = 91.3268
-margin_bottom = 38.4541
+margin_left = -316.522
+margin_top = 8.57311
+margin_right = -48.5223
+margin_bottom = 40.5731
 grow_horizontal = 0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.811765, 0.776471, 0.721569, 1 )
-text = "Hello"
+text = "Hellogftdft"
 align = 2
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSlider" type="HSlider" parent="."]
-margin_left = -552.0
-margin_top = 144.0
-margin_right = -397.0
-margin_bottom = 176.0
+margin_left = -697.146
+margin_top = 149.297
+margin_right = -542.146
+margin_bottom = 181.297
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( -650.382, 157.055 )
 theme = SubResource( 1 )

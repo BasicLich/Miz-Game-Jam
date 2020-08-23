@@ -40,6 +40,10 @@ public class SelectableMenuItem : TextureRect
 		else
 		{
 			Modulate = new Color(1f, 1f, 1f, 1f);
+			if (HasNode("HSlider"))
+			{
+				((HSlider)FindNode("HSlider")).ReleaseFocus();
+			}
 		}
 	}
 	private void _on_HSlider_value_changed(float value)

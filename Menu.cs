@@ -17,7 +17,7 @@ public class Menu : Node
 	{
 		Global.state = "menu";
 		EmitSignal(nameof(menuSelection), menuSelectionIndex);
-		menuSize = GetChildren().Count-4;
+		menuSize = GetChildren().Count-5;
 	}
 
 public override void _Process(float delta)
@@ -26,13 +26,20 @@ public override void _Process(float delta)
 		{
 			if (Input.IsActionJustPressed("ui_up"))
 			{
-				menuSelectionIndex = (menuSelectionIndex - 1) % menuSize;
+				if (menuSelectionIndex==0)
+				{
+					menuSelectionIndex = menuSize - 1;
+				
+				}
+				else
+				{
+					menuSelectionIndex--;
+				}
 			}
 			else if (Input.IsActionJustPressed("ui_down"))
 			{
 				menuSelectionIndex = (menuSelectionIndex + 1) % menuSize;
 			}
-
 			EmitSignal(nameof(menuSelection), menuSelectionIndex);
 			((AudioStreamPlayer)GetNode("/root/"+Name+"/Audio/Select")).Play();
 		}
@@ -52,6 +59,10 @@ public override void _Process(float delta)
 						GetTree().ChangeScene("res://Options.tscn");
 						break;
 					case 2:
+						Global.playsoundname = "Select";
+						GetTree().ChangeScene("res://Tutorial.tscn");
+						break;
+					case 3:
 						GetTree().Quit();
 						break;
 				}
@@ -61,6 +72,10 @@ public override void _Process(float delta)
 				switch (menuSelectionIndex)
 				{
 					case 2:
+						Global.playsoundname = "Select";
+						OS.WindowFullscreen = !OS.WindowFullscreen;
+						break;
+					case 4:
 						 Global.playsoundname="Select";
 						GetTree().ChangeScene("res://Menu.tscn");
 						break;
